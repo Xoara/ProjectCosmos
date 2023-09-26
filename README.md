@@ -1,6 +1,6 @@
 # ProjectCosmos
 This is a ProjectKorra Addon-Abilities PluginPack.
-- Special thanks to: Hiro3, KWilson272 and _Hetag1216_ for contributing to this plugin.
+- Special thanks to: _Hiro3_, _KWilson272_ and _Hetag1216_ for contributing to this plugin.
 ### Here is a list of abilities contained in this plugin:
 
 ## Air Bending
