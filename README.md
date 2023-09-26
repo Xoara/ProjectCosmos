@@ -46,7 +46,7 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - StellarBreath
 - WormHole
 - BlackHole (Combo)
-- GravityFall (Combo)
+- AccretionDisk (Combo)
 - StellarCrash (Combo)
 - TectonicDisruption (Combo)
 - Defiance (Passive)
@@ -100,4 +100,8 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - Radial
 
 ## Planned Abilities:
-- 
+- RazorLaser (Laser)
+- WaterBall (Water)
+- GravityFlux (Cosmic)
+- MoltenSlicer (Earth, Lava)
+- FlameStorm (Fire)
