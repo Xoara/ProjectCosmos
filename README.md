@@ -94,3 +94,5 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - GravityFlux
 - MoltenSlicer
 - FlameStorm
+
+### I am open to suggestions or ideas aswell! Feel free to message me if you want to: DISCORD: xoarasol#8888
