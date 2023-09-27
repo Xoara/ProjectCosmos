@@ -1,0 +1,77 @@
+name: ProjectCosmos
+main: com.xoarasol.projectcosmos.ProjectCosmos
+version: v2.5
+authors: [ 'Wilson & Xoara' ]
+depend: [ 'ProjectKorra' ]
+api-version: 1.16
+permissions:
+  bending.laser:
+    default: true
+    description: Grants access to all Laserbending abilities.
+    children:
+      bending.laser.forcefieldbending: true
+      bending.laser.radiationbending: true
+      bending.laser.passive: true
+      bending.laser.combos: true
+      bending.ability.decontaminate: true
+      bending.ability.dispersion: true
+      bending.ability.fallout: true
+      bending.ability.ionize: true
+      bending.ability.photonring: true
+      bending.ability.systemicshock: true
+      bending.ability.photonbooster: true
+      bending.ability.plasmabolt: true
+      bending.ability.plasmaradial: true
+      bending.ability.plasmastorm: true
+      bending.ability.plasmawave: true
+      bending.ability.voiceoflight: true
+      bending.ability.contaminate: true
+      bending.ability.disintegration: true
+      bending.ability.hotspot: true
+      bending.ability.meltdown: true
+      bending.ability.radiationburst: true
+      bending.ability.barrier: true
+      bending.ability.boost: true
+      bending.ability.laserfission: true
+      bending.ability.lasergaze: true
+      bending.ability.laserlance: true
+      bending.ability.laserpunch: true
+      bending.ability.pulse: true
+      bending.ability.reversal: true
+  bending.cosmic:
+    default: true
+    description: Grants access to all Cosmicbending abilities.
+    children:
+      bending.cosmic.gravitybending: true
+      bending.cosmic.darkcosmicbending: false
+      bending.cosmic.lunarbending: true
+      bending.cosmic.solarbending: true
+      bending.cosmic.combos: true
+      bending.cosmic.passive: true
+      bending.ability.blackhole: true
+      bending.ability.gravitycrash: true
+      bending.ability.gravityfall: true
+      bending.ability.gravitywave: true
+      bending.ability.blastoff: true
+      bending.ability.gravityhook: true
+      bending.ability.gravitymanipulation: true
+      bending.ability.gravitystance: true
+      bending.ability.orbital: true
+      bending.ability.defiance: true
+      bending.ability.constellationcutter: true
+      bending.ability.pulsar: true
+      bending.ability.solarstorm: true
+      bending.ability.sunrise: true
+      bending.ability.darkmatter: true
+      bending.ability.vacuumsphere: true
+      bending.ability.voidwalk: true
+      bending.ability.cometstrike: true
+      bending.ability.cosmicblast: true
+      bending.ability.cosmicseeker: true
+      bending.ability.eventhorizon: true
+      bending.ability.galaxyshield: true
+      bending.ability.oblivionring: true
+      bending.ability.primordialburst: true
+      bending.ability.supernova: true
+      bending.ability.wormhole: true
+
