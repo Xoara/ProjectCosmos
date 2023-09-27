@@ -105,3 +105,5 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - GravityFlux (Cosmic)
 - MoltenSlicer (Earth, Lava)
 - FlameStorm (Fire)
+- EnergyBurst (Laser, Forcefield)
+- 
