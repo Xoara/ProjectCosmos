@@ -139,6 +139,7 @@ public class ConfigManager {
         config.addDefault("Abilities.Cosmic.EventHorizon.Range", 22);
         config.addDefault("Abilities.Cosmic.EventHorizon.ChargeTime", 800);
         config.addDefault("Abilities.Cosmic.EventHorizon.Damage", 2);
+        config.addDefault("Abilities.Cosmic.EventHorizon.Growth", 0.450);
         pkConfig.addDefault("Abilities.Cosmic.EventHorizon.DeathMessage", "{victim} was caught and struck down in {attacker}'s {ability}");
 
         //AstralFlight
@@ -213,18 +214,18 @@ public class ConfigManager {
         config.addDefault("Abilities.Cosmic.Lunar.Orbital.LunarPullFactor", 0.001);
         pkConfig.addDefault("Abilities.Cosmic.Lunar.Orbital.DeathMessage", "{victim} didn't survive the impact of {attacker}'s {ability}");
 
-        //GlintOfDiana
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.Enabled", true);
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.Cooldown", 6700);
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.Range", 14);
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.ProjectileSpeed", 30);
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.Duration", 2000);
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.CollisionRadius", 1);
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.Pull", 2);
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.ImpactRadius", 4);
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.Knockback", 1);
-        config.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.Damage", 3);
-        pkConfig.addDefault("Abilities.Cosmic.Lunar.GlintOfDiana.DeathMessage", "{attacker} killed {victim} on impact using {ability}");
+        //LunarGlint
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Enabled", true);
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Cooldown", 6700);
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Range", 14);
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.ProjectileSpeed", 30);
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Duration", 2000);
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.CollisionRadius", 1);
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Pull", 2);
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.ImpactRadius", 4);
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Knockback", 1);
+        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Damage", 3);
+        pkConfig.addDefault("Abilities.Cosmic.Lunar.LunarGlint.DeathMessage", "{attacker} killed {victim} on impact using {ability}");
 
         //Rover
         config.addDefault("Abilities.Cosmic.Lunar.Rover.Enabled", true);

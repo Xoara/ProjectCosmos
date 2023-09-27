@@ -281,7 +281,7 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
     private void playEffect() {
         if (!charged) {
             Location loc = GeneralMethods.getTargetedLocation(player, 5);
-            ParticleEffect.ELECTRIC_SPARK.display(loc, 2, 0, 0, 0, 0.005);
+            ParticleEffect.CLOUD.display(loc, 1, 0, 0, 0, 0.005);
             loc.getWorld().playSound(loc, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.4f, 0.90F);
 
             //sphere
@@ -292,13 +292,13 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
                 double angle = p * increment;
                 double x1 = centre.getX() + (/* radius */ 1 * -Math.cos(angle));
                 double z1 = centre.getZ() + (/* radius */ 1 * -Math.sin(angle));
-                ParticleEffect.ELECTRIC_SPARK.display(new Location(centre.getWorld(), x1, centre.getY(), z1), 2, 0, 0, 0, 0.04);
+                ParticleEffect.CLOUD.display(new Location(centre.getWorld(), x1, centre.getY(), z1), 2, 0, 0, 0, 0.04);
             }
         } else {
             Location fakeLoc = GeneralMethods.getTargetedLocation(player, 5);
             //Disc
 
-            ParticleEffect.ELECTRIC_SPARK.display(fakeLoc, 2, 0.222, 0.222, 0.222, 0.0111f);
+            ParticleEffect.END_ROD.display(fakeLoc, 1, 0.222, 0.222, 0.222, 0.0111f);
             fakeLoc.getWorld().playSound(fakeLoc, Sound.BLOCK_BEACON_AMBIENT, 1f, 0.96F);
 
             fakeLoc.setPitch(0);
@@ -310,7 +310,7 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
                 tempLoc.add(newDir);
                 tempLoc.setY(tempLoc.getY() + 0 + (1 * Math.sin(Math.toRadians(j))));
 
-                ParticleEffect.ELECTRIC_SPARK.display(tempLoc, 4, 0.1, 0.1, 0.1);
+                ParticleEffect.END_ROD.display(tempLoc, 1, 0.1, 0.1, 0.1);
             }
 
 

@@ -123,7 +123,6 @@ public class Rover extends LunarAbility implements AddonAbility {
                 for (Entity entity : GeneralMethods.getEntitiesAroundPoint(player.getLocation(), 1.0)) {
                     if (entity instanceof LivingEntity && !entity.getUniqueId().equals(player.getUniqueId())) {
                         DamageHandler.damageEntity(entity, player, damage, this);
-                        remove();
                         return;
                     }
                 }

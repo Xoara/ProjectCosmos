@@ -43,6 +43,7 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
     private Vector direction;
     private Location location;
     private Location origin;
+    private double growing;
 
     public EventHorizon(Player player) {
         super(player);
@@ -62,6 +63,7 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
         this.range = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.EventHorizon.Range");
         this.chargeTime = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.EventHorizon.ChargeTime");
         this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.EventHorizon.Damage");
+        this.growing = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.EventHorizon.Growth");
     }
 
     @Override
@@ -102,7 +104,7 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
             location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 0.8F, 0.75F);
             location.getWorld().playSound(location, Sound.AMBIENT_BASALT_DELTAS_MOOD, 0.8F, 2F);
 
-            growth += 0.450;
+            growth += this.growing;
             if (origin.distance(location) >= range) {
                 remove();
                 bPlayer.addCooldown(this);

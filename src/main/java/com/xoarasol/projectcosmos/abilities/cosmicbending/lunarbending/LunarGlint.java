@@ -18,7 +18,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class GlintOfDiana extends LunarAbility implements AddonAbility {
+public class LunarGlint extends LunarAbility implements AddonAbility {
 
     @Attribute(Attribute.COOLDOWN)
     private long cooldown;
@@ -48,20 +48,20 @@ public class GlintOfDiana extends LunarAbility implements AddonAbility {
     private int an;
     private int pstage;
 
-    public GlintOfDiana(Player player) {
+    public LunarGlint(Player player) {
         super(player);
 
-        if (this.bPlayer.canBend(this) && !CoreAbility.hasAbility(player, GlintOfDiana.class)) {
-            this.cooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.GlintOfDiana.Cooldown");
-            this.range = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.GlintOfDiana.Range");
-            this.speed = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.GlintOfDiana.ProjectileSpeed") * (ProjectKorra.time_step / 1000F);
-            this.duration = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.GlintOfDiana.Duration");
-            this.radius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.GlintOfDiana.CollisionRadius");
-            this.pull = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.GlintOfDiana.Pull");
-            this.impactRadius = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Lunar.GlintOfDiana.ImpactRadius");
-            this.knockback = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.GlintOfDiana.Knockback");
-            this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.GlintOfDiana.Damage");
-            this.onMissCooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.GlintOfDiana.OnMissCooldown");
+        if (this.bPlayer.canBend(this) && !CoreAbility.hasAbility(player, LunarGlint.class)) {
+            this.cooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.LunarGlint.Cooldown");
+            this.range = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.Range");
+            this.speed = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.ProjectileSpeed") * (ProjectKorra.time_step / 1000F);
+            this.duration = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.LunarGlint.Duration");
+            this.radius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.CollisionRadius");
+            this.pull = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.Pull");
+            this.impactRadius = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Lunar.LunarGlint.ImpactRadius");
+            this.knockback = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.Knockback");
+            this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.Damage");
+            this.onMissCooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.LunarGlint.OnMissCooldown");
 
             this.origin = GeneralMethods.getMainHandLocation(this.player);
             this.location = origin.clone();
@@ -116,7 +116,7 @@ public class GlintOfDiana extends LunarAbility implements AddonAbility {
             grid();
             grid2();
 
-            if (this.player.isSneaking() && this.bPlayer.getBoundAbilityName().equalsIgnoreCase("GlintOfDiana")) {
+            if (this.player.isSneaking() && this.bPlayer.getBoundAbilityName().equalsIgnoreCase("LunarGlint")) {
                 Vector vec = PCMethods.createDirectionalVector(player.getEyeLocation(), target.getEyeLocation());
                 GeneralMethods.setVelocity(this, player, vec.normalize().multiply(pull));
 
@@ -286,7 +286,7 @@ public class GlintOfDiana extends LunarAbility implements AddonAbility {
 
     @Override
     public boolean isEnabled() {
-        return ProjectCosmos.plugin.getConfig().getBoolean("Abilities.Cosmic.Lunar.GlintOfDiana.Enabled");
+        return ProjectCosmos.plugin.getConfig().getBoolean("Abilities.Cosmic.Lunar.LunarGlint.Enabled");
     }
 
     @Override
@@ -296,7 +296,7 @@ public class GlintOfDiana extends LunarAbility implements AddonAbility {
 
     @Override
     public String getName() {
-        return "GlintOfDiana";
+        return "LunarGlint";
     }
 
     @Override

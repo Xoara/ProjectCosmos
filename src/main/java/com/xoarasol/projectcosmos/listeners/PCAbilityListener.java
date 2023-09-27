@@ -111,7 +111,7 @@ public class PCAbilityListener implements Listener {
                     new GravityBinding(player);
                     break;
                 case ("GLINTOFDIANA"):
-                    new GlintOfDiana(player);
+                    new LunarGlint(player);
                     break;
                 case ("WORMHOLE"):
                     new WormHole(player);

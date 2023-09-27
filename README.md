@@ -35,6 +35,7 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - LunarGlint
 - MoonFall
 - LunarClap
+- Orbital
 ### Gravity Bending
 - BlastOff
 - GravityBinding
