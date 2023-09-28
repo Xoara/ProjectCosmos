@@ -30,16 +30,82 @@ public class ConfigManager {
 
         // -- Air --
 
+        //HowlingGale
+        config.addDefault("Abilities.Air.HowlingGale.Enabled", true);
+        config.addDefault("Abilities.Air.HowlingGale.Range", 20);
+        config.addDefault("Abilities.Air.HowlingGale.Cooldown", 2000);
+        config.addDefault("Abilities.Air.HowlingGale.Damage", 1);
+        config.addDefault("Abilities.Air.HowlingGale.Controllable", false);
+        config.addDefault("Abilities.Air.HowlingGale.Power", 1);
+        config.addDefault("Abilities.Air.HowlingGale.Speed", 1);
+        config.addDefault("Abilities.Air.HowlingGale.BounceLimit", 10);
+
+        // - Spiritual -
+
+        //SpiritualShift
+        config.addDefault("Abilities.Air.Spiritual.SpiritualShift.Enabled", true);
+        config.addDefault("Abilities.Air.Spiritual.SpiritualShift.Cooldown", 10000);
+        config.addDefault("Abilities.Air.Spiritual.SpiritualShift.MaxDuration", 10000);
+        config.addDefault("Abilities.Air.Spiritual.SpiritualShift.FlightSpeed", 0.75);
+        config.addDefault("Abilities.Air.Spiritual.SpiritualShift.Remove.onAttack", true);
+        config.addDefault("Abilities.Air.Spiritual.SpiritualShift.Remove.onDamage", true);
+
+        //TemperedFate
+        config.addDefault("Abilities.Air.Spiritual.TemperedFate.Enabled", true);
+        config.addDefault("Abilities.Air.Spiritual.TemperedFate.Cooldown", 10000);
+        config.addDefault("Abilities.Air.Spiritual.TemperedFate.Range", 30);
+        config.addDefault("Abilities.Air.Spiritual.TemperedFate.Speed", 25);
+        config.addDefault("Abilities.Air.Spiritual.TemperedFate.Damage", 4);
+        config.addDefault("Abilities.Air.Spiritual.TemperedFate.StartingHeight", 50);
+        config.addDefault("Abilities.Air.Spiritual.TemperedFate.ImpactRadius", 5);
+        config.addDefault("Abilities.Air.Spiritual.TemperedFate.Knockback", 1);
+
         // -- Water --
 
         // -- Earth --
+
+        // - Sand -
+
+        //AridEruption
+        config.addDefault("Abilities.Earth.Sand.AridEruption.Enabled", true);
+        config.addDefault("Abilities.Earth.Sand.AridEruption.Cooldown", 2000);
+        config.addDefault("Abilities.Earth.Sand.AridEruption.ChargeTime", 900);
+        config.addDefault("Abilities.Earth.Sand.AridEruption.Damage", 2);
+        config.addDefault("Abilities.Earth.Sand.AridEruption.Steps", 26);
+        config.addDefault("Abilities.Earth.Sand.AridEruption.Blindness.Duration", 40);
+        config.addDefault("Abilities.Earth.Sand.AridEruption.Blindness.Power", 2);
 
         // -- Fire --
 
         // - Lightning -
 
-        //ThunderSplice
+        //ElectricDischarge
+        config.addDefault("Abilities.Fire.Lightning.ElectricDischarge.Enabled", true);
+        config.addDefault("Abilities.Fire.Lightning.ElectricDischarge.Range", 20);
+        config.addDefault("Abilities.Fire.Lightning.ElectricDischarge.Damage", 2);
+        config.addDefault("Abilities.Fire.Lightning.ElectricDischarge.Cooldown", 4000);
+        config.addDefault("Abilities.Fire.Lightning.ElectricDischarge.SingleBoltCollisionRadius", 1.2);
 
+        //VoltaicPulse
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.Enabled", true);
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.Range", 10);
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.Damage", 2);
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.ChargeTime", 1000);
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.Cooldown", 8000);
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.Electrocute.StunChances", 0.6);
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.Electrocute.StunDuration", 1000);
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.Push", 1);
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.SuperArmor.Enabled", true);
+        config.addDefault("Abilities.Fire.Lightning.VoltaicPulse.SuperArmor.ResistancePower", 4);
+
+        //BoltStream
+        config.addDefault("Abilities.Fire.Combos.BoltStream.Enabled", true);
+        config.addDefault("Abilities.Fire.Combos.BoltStream.Range", 20);
+        config.addDefault("Abilities.Fire.Combos.BoltStream.Damage", 1.5);
+        config.addDefault("Abilities.Fire.Combos.BoltStream.Cooldown", 15000);
+        config.addDefault("Abilities.Fire.Combos.BoltStream.Power", 1);
+        config.addDefault("Abilities.Fire.Combos.BoltStream.Lightning.Interval", 4);
+        config.addDefault("Abilities.Fire.Combos.BoltStream.Lightning.HitRadius", 4);
 
         // - Combustion -
 
@@ -72,29 +138,16 @@ public class ConfigManager {
         config.addDefault("Abilities.Cosmic.TheSkiesDescend.CollisionRadius", 2);
         config.addDefault("Abilities.Cosmic.TheSkiesDescend.ExplosionRadius", 4);
         config.addDefault("Abilities.Cosmic.TheSkiesDescend.Delay", 750);
+        config.addDefault("Abilities.Cosmic.TheSkiesDescend.KnockUp", 2);
         config.addDefault("Abilities.Cosmic.TheSkiesDescend.Range", 36);
-        config.addDefault("Abilities.Cosmic.TheSkiesDescend.SlowDuration", 35);
-        config.addDefault("Abilities.Cosmic.TheSkiesDescend.SlowPower", 1);
+        config.addDefault("Abilities.Cosmic.TheSkiesDescend.LevitationDuration", 35);
+        config.addDefault("Abilities.Cosmic.TheSkiesDescend.LevitationPower", 1);
         config.addDefault("Abilities.Cosmic.TheSkiesDescend.BlockRevertTime", 7500);
         pkConfig.addDefault("Abilities.Cosmic.TheSkiesDescend.DeathMessage", "{victim} was crushed after finding themselves under {attacker}'s {ability}");
 
         //SpaceWarp
         config.addDefault("Abilities.Cosmic.SpaceWarp.Enabled", true);
         config.addDefault("Abilities.Cosmic.SpaceWarp.Cooldown", 12000);
-
-        //GravityFlux
-        config.addDefault("Abilities.Cosmic.GravityFlux.Enabled", true);
-        config.addDefault("Abilities.Cosmic.GravityFlux.Cooldown", 10000);
-        config.addDefault("Abilities.Cosmic.GravityFlux.Damage", 4);
-        config.addDefault("Abilities.Cosmic.GravityFlux.Speed", 80);
-        config.addDefault("Abilities.Cosmic.GravityFlux.Delay", 1200);
-        config.addDefault("Abilities.Cosmic.GravityFlux.KnockUp", 2);
-        config.addDefault("Abilities.Cosmic.GravityFlux.Range", 25);
-        config.addDefault("Abilities.Cosmic.GravityFlux.LevitationDuration", 35);
-        config.addDefault("Abilities.Cosmic.GravityFlux.LevitationPower", 1);
-        config.addDefault("Abilities.Cosmic.GravityFlux.CollisionRadius", 2);
-        config.addDefault("Abilities.Cosmic.GravityFlux.ExplosionRadius", 6);
-        config.addDefault("Abilities.Cosmic.GravityFlux.BlockRevertTime", 5000);
 
         //CosmicBlast
         config.addDefault("Abilities.Cosmic.CosmicBlast.Enabled", true);
@@ -401,6 +454,7 @@ public class ConfigManager {
         config.addDefault("Abilities.Cosmic.Combos.AccretionDisk.Levitation.Amplifier", 740);
         config.addDefault("Abilities.Cosmic.Combos.AccretionDisk.SlowFalling.Duration", 7000);
         config.addDefault("Abilities.Cosmic.Combos.AccretionDisk.SlowFalling.Amplifier", 1);
+
         pkConfig.addDefault("Abilities.Cosmic.AccretionDisk.DeathMessage", "{victim} couldn't adapt to {attacker}'s {ability}");
 
         //TectonicDisruption

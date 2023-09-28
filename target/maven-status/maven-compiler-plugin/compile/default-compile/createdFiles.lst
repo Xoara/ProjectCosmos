@@ -70,6 +70,7 @@ com\xoarasol\projectcosmos\abilities\waterbending\plantbending\IvySpores.class
 com\xoarasol\projectcosmos\abilities\laserbending\radiation\Contaminate.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\gravitybending\MassManipulation$1.class
 com\xoarasol\projectcosmos\abilities\earthbending\sandbending\AridEruption.class
+com\xoarasol\projectcosmos\abilities\firebending\lightningsbending\ElectricDischarge$Bolt.class
 com\xoarasol\projectcosmos\abilities\laserbending\ElectronLance.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\gravitybending\GravityBinding.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\combos\TectonicDisruption.class
@@ -78,6 +79,7 @@ com\xoarasol\projectcosmos\PCElement$3.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\lunarbending\LunarClap.class
 com\xoarasol\projectcosmos\ProjectCosmos.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\SpaceWarp.class
+com\xoarasol\projectcosmos\abilities\earthbending\sandbending\AridEruption$Wave.class
 com\xoarasol\projectcosmos\abilities\laserbending\forcefield\EnergyBolt$1.class
 com\xoarasol\projectcosmos\abilities\laserbending\combos\PhotonRing.class
 com\xoarasol\projectcosmos\abilities\laserbending\radiation\RadiationBurst$Wave.class
@@ -90,7 +92,6 @@ com\xoarasol\projectcosmos\PCElement$8.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\CosmoscopeVision.class
 com\xoarasol\projectcosmos\abilities\earthbending\sandbending\DustSpout.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\combos\StellarCrash.class
-com\xoarasol\projectcosmos\abilities\cosmicbending\gravitybending\GravityFlux.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\lunarbending\Rover.class
 com\xoarasol\projectcosmos\abilities\laserbending\forcefield\Barrier.class
 com\xoarasol\projectcosmos\abilities\laserbending\combos\Decontaminate.class
@@ -109,7 +110,6 @@ com\xoarasol\projectcosmos\abilities\firebending\IgnitionJab.class
 com\xoarasol\projectcosmos\abilities\laserbending\combos\Dispersion$LightStream.class
 com\xoarasol\projectcosmos\abilities\laserbending\passives\PhotonBooster.class
 com\xoarasol\projectcosmos\PCElement$7.class
-com\xoarasol\projectcosmos\abilities\firebending\lightningsbending\ConcentratedBolt.class
 com\xoarasol\projectcosmos\api\LaserAbility$1.class
 com\xoarasol\projectcosmos\abilities\earthbending\lavabending\MoltenSlicer.class
 com\xoarasol\projectcosmos\PCElement$1.class

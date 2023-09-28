@@ -1,9 +1,9 @@
 name: ProjectCosmos
 main: com.xoarasol.projectcosmos.ProjectCosmos
-version: v0.5.1
+version: v0.5.3
 authors: [ 'Wilson & Xoara' ]
 depend: [ 'ProjectKorra' ]
-api-version: 1.16
+api-version: 1.19
 permissions:
   bending.laser:
     default: true

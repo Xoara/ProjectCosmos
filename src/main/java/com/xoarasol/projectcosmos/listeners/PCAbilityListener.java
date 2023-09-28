@@ -6,15 +6,24 @@ import com.projectkorra.projectkorra.ability.util.Collision;
 import com.projectkorra.projectkorra.ability.util.PassiveManager;
 import com.projectkorra.projectkorra.event.AbilityCollisionEvent;
 import com.xoarasol.projectcosmos.PCElement;
+import com.xoarasol.projectcosmos.abilities.airbending.HowlingGale;
+import com.xoarasol.projectcosmos.abilities.airbending.spiritual.SpiritualShift;
+import com.xoarasol.projectcosmos.abilities.airbending.spiritual.TemperedFate;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.*;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.darkcosmicbending.AntiMatter;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.darkcosmicbending.NullSphere;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.*;
+import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.BlastOff;
+import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.GravityBinding;
+import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.GravityManipulation;
+import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.MassManipulation;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.lunarbending.*;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending.CrackOfDawn;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending.Pulsar;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending.SolarCyclone;
+import com.xoarasol.projectcosmos.abilities.earthbending.sandbending.AridEruption;
 import com.xoarasol.projectcosmos.abilities.firebending.combustionbending.CombustingBeam;
+import com.xoarasol.projectcosmos.abilities.firebending.lightningsbending.ElectricDischarge;
+import com.xoarasol.projectcosmos.abilities.firebending.lightningsbending.VoltaicPulse;
 import com.xoarasol.projectcosmos.abilities.laserbending.*;
 import com.xoarasol.projectcosmos.abilities.laserbending.combos.Dispersion;
 import com.xoarasol.projectcosmos.abilities.laserbending.combos.SystemicShock;
@@ -52,10 +61,22 @@ public class PCAbilityListener implements Listener {
             String abil = bPlayer.getBoundAbilityName();
 
             switch (abil.toUpperCase()) {
-                //Test
+                //Air
+                case ("HOWLINGGALE"):
+                    new HowlingGale(player);
+                    break;
+                case ("SPIRITUALSHIFT"):
+                    SpiritualShift.disengage(player);
+                    break;
+                case ("TEMPEREDFATE"):
+                    new TemperedFate(player);
+                    break;
                 //Fire
                 case ("COMBUSTINGBEAM"):
                     new CombustingBeam(player);
+                    break;
+                case ("ELECTRICDISCHARGE"):
+                    new ElectricDischarge(player);
                     break;
                 //Laser
                 case ("REVERSAL"):
@@ -131,9 +152,6 @@ public class PCAbilityListener implements Listener {
                 case ("BLASTOFF"):
                     BlastOff.activate(player);
                     break;
-               case ("GRAVITYFLUX"):
-                    new GravityFlux(player);
-                    break;
                 case ("STARSURGE"):
                     StarSurge.explode(player);
                     break;
@@ -171,6 +189,18 @@ public class PCAbilityListener implements Listener {
 
         if (!player.isSneaking()) {
             switch (abil.toUpperCase()) {
+                //Air
+                case ("SPIRITUALSHIFT"):
+                    new SpiritualShift(player);
+                    break;
+                //Earth
+                case ("ARIDERUPTION"):
+                    new AridEruption(player);
+                    break;
+                //Fire
+                case ("VOLTAICPULSE"):
+                    new VoltaicPulse(player);
+                    break;
                 //Laser
                 case ("PHOTONPUNCH"):
                     new PhotonPunch(player);

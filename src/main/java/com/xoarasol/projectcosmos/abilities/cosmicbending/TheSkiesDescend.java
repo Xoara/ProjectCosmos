@@ -54,6 +54,7 @@ public class TheSkiesDescend extends CosmicAbility implements AddonAbility {
     private Vector direction;
 
     private boolean firing;
+    private int knockUp;
 
     public TheSkiesDescend(Player player) {
         super(player);
@@ -70,9 +71,10 @@ public class TheSkiesDescend extends CosmicAbility implements AddonAbility {
                 this.radius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.TheSkiesDescend.CollisionRadius");
                 this.explosionRadius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.TheSkiesDescend.ExplosionRadius");
                 this.delay = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.TheSkiesDescend.Delay");
+                this.knockUp = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.TheSkiesDescend.KnockUp");
                 this.blockRevertTime = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.TheSkiesDescend.BlockRevertTime");
-                this.slowDuration = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.TheSkiesDescend.SlowDuration");
-                this.slowPower = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.TheSkiesDescend.SlowPower");
+                this.slowDuration = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.TheSkiesDescend.LevitationDuration");
+                this.slowPower = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.TheSkiesDescend.LevitationPower");
 
                 this.firing = false;
 
@@ -184,15 +186,16 @@ public class TheSkiesDescend extends CosmicAbility implements AddonAbility {
         for (Entity entity : GeneralMethods.getEntitiesAroundPoint(location, explosionRadius)) {
             if (entity instanceof LivingEntity && !entity.getUniqueId().equals(player.getUniqueId())) {
                 DamageHandler.damageEntity(entity, player, damage, this);
+                GeneralMethods.setVelocity(this, entity, new Vector(0, knockUp, 0));
 
-                if (!((LivingEntity) entity).hasPotionEffect(PotionEffectType.SLOW)) {
-                    ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, slowDuration, slowPower, false, false, false));
+                if (!((LivingEntity) entity).hasPotionEffect(PotionEffectType.LEVITATION)) {
+                    ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, slowDuration, slowPower, false, false, false));
                 }
             }
         }
         for (Block block : GeneralMethods.getBlocksAroundPoint(location, explosionRadius * 1.5)) {
             if (GeneralMethods.isSolid(block) && isAir(block.getRelative(BlockFace.UP).getType())) {
-                TempBlock tb = new TempBlock(block.getRelative(BlockFace.SELF), Material.MAGMA_BLOCK);
+                TempBlock tb = new TempBlock(block.getRelative(BlockFace.SELF), Material.SCULK);
                 tb.setRevertTime(blockRevertTime);
 
                 if (ThreadLocalRandom.current().nextInt(4) == 0) {
@@ -261,12 +264,10 @@ public class TheSkiesDescend extends CosmicAbility implements AddonAbility {
 
     @Override
     public void load() {
-
     }
 
     @Override
     public void stop() {
-
     }
 
     @Override
