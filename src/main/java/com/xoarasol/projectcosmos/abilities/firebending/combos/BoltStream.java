@@ -175,7 +175,7 @@ public class BoltStream extends LightningAbility implements ComboAbility {
     }
 
     public boolean isEnabled() {
-        return ProjectCosmos.plugin.getConfig().getBoolean("Abilities.Fire.BoltStream.Enabled");
+        return ProjectCosmos.plugin.getConfig().getBoolean("Abilities.Fire.Combos.BoltStream.Enabled");
     }
 
     public String getName() {
