@@ -1,6 +1,6 @@
 name: ProjectCosmos
 main: com.xoarasol.projectcosmos.ProjectCosmos
-version: v2.5
+version: v0.5.1
 authors: [ 'Wilson & Xoara' ]
 depend: [ 'ProjectKorra' ]
 api-version: 1.16

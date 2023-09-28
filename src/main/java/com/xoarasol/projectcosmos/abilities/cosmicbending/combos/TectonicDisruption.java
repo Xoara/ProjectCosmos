@@ -95,7 +95,7 @@ public class TectonicDisruption extends GravityAbility implements AddonAbility, 
                 if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
                     BlockData blockData = Bukkit.createBlockData(Material.CRYING_OBSIDIAN);
                     FallingBlock fallingBlock = block.getWorld().spawnFallingBlock(block.getLocation().add(0, 1, 0), blockData);
-                    fallingBlock.setMetadata("gravitywave", new FixedMetadataValue(ProjectCosmos.plugin, this));
+                    fallingBlock.setMetadata("tectonicdisruption", new FixedMetadataValue(ProjectCosmos.plugin, this));
                     fallingBlock.setDropItem(false);
                     fallingBlock.setVelocity(new Vector(0, 1, 0).normalize().multiply(0.2));
 
@@ -109,7 +109,7 @@ public class TectonicDisruption extends GravityAbility implements AddonAbility, 
                     BlockData blockData = Bukkit.createBlockData(Material.SCULK);
                     FallingBlock fallingBlock = block.getWorld().spawnFallingBlock(block.getLocation().add(0, 1, 0), blockData);
 
-                    fallingBlock.setMetadata("gravitywave", new FixedMetadataValue(ProjectCosmos.plugin, this));
+                    fallingBlock.setMetadata("tectonicdisruption", new FixedMetadataValue(ProjectCosmos.plugin, this));
                     fallingBlock.setDropItem(false);
                     fallingBlock.setVelocity(new Vector(0, 1, 0).normalize().multiply(0.2));
 

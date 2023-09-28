@@ -82,6 +82,20 @@ public class ConfigManager {
         config.addDefault("Abilities.Cosmic.SpaceWarp.Enabled", true);
         config.addDefault("Abilities.Cosmic.SpaceWarp.Cooldown", 12000);
 
+        //GravityFlux
+        config.addDefault("Abilities.Cosmic.GravityFlux.Enabled", true);
+        config.addDefault("Abilities.Cosmic.GravityFlux.Cooldown", 10000);
+        config.addDefault("Abilities.Cosmic.GravityFlux.Damage", 4);
+        config.addDefault("Abilities.Cosmic.GravityFlux.Speed", 80);
+        config.addDefault("Abilities.Cosmic.GravityFlux.Delay", 1200);
+        config.addDefault("Abilities.Cosmic.GravityFlux.KnockUp", 2);
+        config.addDefault("Abilities.Cosmic.GravityFlux.Range", 25);
+        config.addDefault("Abilities.Cosmic.GravityFlux.LevitationDuration", 35);
+        config.addDefault("Abilities.Cosmic.GravityFlux.LevitationPower", 1);
+        config.addDefault("Abilities.Cosmic.GravityFlux.CollisionRadius", 2);
+        config.addDefault("Abilities.Cosmic.GravityFlux.ExplosionRadius", 6);
+        config.addDefault("Abilities.Cosmic.GravityFlux.BlockRevertTime", 5000);
+
         //CosmicBlast
         config.addDefault("Abilities.Cosmic.CosmicBlast.Enabled", true);
         config.addDefault("Abilities.Cosmic.CosmicBlast.Cooldown", 5600);

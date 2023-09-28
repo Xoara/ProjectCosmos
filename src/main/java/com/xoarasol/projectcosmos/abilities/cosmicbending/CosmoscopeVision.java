@@ -176,13 +176,17 @@ public class CosmoscopeVision extends CosmicAbility implements AddonAbility {
     }
 
     @Override
-    public void load() {
+    public boolean isHiddenAbility() {
+        return true;
+    }
 
+
+    @Override
+    public void load() {
     }
 
     @Override
     public void stop() {
-
     }
 
     @Override

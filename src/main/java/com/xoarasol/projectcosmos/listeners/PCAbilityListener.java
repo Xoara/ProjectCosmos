@@ -9,10 +9,7 @@ import com.xoarasol.projectcosmos.PCElement;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.*;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.darkcosmicbending.AntiMatter;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.darkcosmicbending.NullSphere;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.BlastOff;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.GravityBinding;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.GravityManipulation;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.MassManipulation;
+import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.*;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.lunarbending.*;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending.CrackOfDawn;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending.Pulsar;
@@ -110,7 +107,7 @@ public class PCAbilityListener implements Listener {
                 case ("GRAVITYBINDING"):
                     new GravityBinding(player);
                     break;
-                case ("GLINTOFDIANA"):
+                case ("LUNARGLINT"):
                     new LunarGlint(player);
                     break;
                 case ("WORMHOLE"):
@@ -133,6 +130,9 @@ public class PCAbilityListener implements Listener {
                     break;
                 case ("BLASTOFF"):
                     BlastOff.activate(player);
+                    break;
+               case ("GRAVITYFLUX"):
+                    new GravityFlux(player);
                     break;
                 case ("STARSURGE"):
                     StarSurge.explode(player);
