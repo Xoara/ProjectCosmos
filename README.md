@@ -3,7 +3,21 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - Special thanks to: _Hiro3_, _KWilson272_ and _Hetag1216_ for contributing to this plugin.
 ### Here is a list of abilities contained in this plugin:
 
+## Air Bending
+- HowlingGale
+### Spiritual
+- TemperedFate
+- SpiritualShift
+
+## Earth Bending
+### Sand Bending
+- AridEruption
+
 ## Fire Bending
+### Lightning Bending
+- ElectricDischarge
+- Voltaiculse
+- BoltStream (Combo)
 ### Combustion Bending
 - CombustingBeam
 
@@ -75,24 +89,15 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - VirtusVeil
 - Barrier
 - Radial
+- EnergyBolt
 
 ## Planned Abilities:
-- HowlingGale
-- TemperedFate
-- SpiritualShift
 - IcicleCrash
 - IvySpores
 - VineTangle
-- AridEruption
 - DustSpout
-- BoltStream (Combo)
-- ThunderSplice
-- VoltaicPulse
-- ElectricDischarge
-- ConcentratedBolt
 - RazorLaser 
 - WaterBall
-- GravityFlux
 - MoltenSlicer
 - FlameStorm
 
