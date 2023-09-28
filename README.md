@@ -9,6 +9,12 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - TemperedFate
 - SpiritualShift
 
+## Water Bending
+### Plant Bending
+- VineTangle
+- IvySpores
+- Chlorophyll
+
 ## Earth Bending
 ### Sand Bending
 - AridEruption
@@ -16,7 +22,7 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 ## Fire Bending
 ### Lightning Bending
 - ElectricDischarge
-- Voltaiculse
+- VoltaicPulse
 - BoltStream (Combo)
 ### Combustion Bending
 - CombustingBeam
