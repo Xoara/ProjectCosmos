@@ -68,6 +68,7 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - LaserJolts
 - LaserFission
 - LaserGaze
+- BurstRays
 - Reversal
 - Updraft (Combo)
 - ForceOfWill (Combo)
@@ -85,6 +86,7 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - Disintegration
 - Contaminate
 - RadiationBurst
+- RadiantTrail
 ### Forcefield Bending
 - VirtusVeil
 - Barrier
@@ -99,6 +101,8 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 - RazorLaser 
 - WaterBall
 - MoltenSlicer
+- MagmaKraken
 - FlameStorm
+- and more!
 
 ### I am open to suggestions or ideas aswell! Feel free to message me if you want to: DISCORD: xoarasol#8888
