@@ -24,6 +24,7 @@ com\xoarasol\projectcosmos\api\LaserAbility.class
 com\xoarasol\projectcosmos\abilities\airbending\spiritual\TemperedFate.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\solarbending\CrackOfDawn.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\combos\BlackHole.class
+com\xoarasol\projectcosmos\abilities\laserbending\radiation\RadiantTrail.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\gravitybending\MassManipulation.class
 com\xoarasol\projectcosmos\abilities\laserbending\Reversal.class
 com\xoarasol\projectcosmos\abilities\laserbending\Boost.class
@@ -65,6 +66,7 @@ com\xoarasol\projectcosmos\PCElement$6.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\StellarBreath.class
 com\xoarasol\projectcosmos\listeners\PCGeneralListener.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\CosmicSeeker.class
+com\xoarasol\projectcosmos\abilities\laserbending\BurstRays.class
 com\xoarasol\projectcosmos\abilities\laserbending\combos\RocketBoots.class
 com\xoarasol\projectcosmos\abilities\waterbending\plantbending\IvySpores.class
 com\xoarasol\projectcosmos\abilities\laserbending\radiation\Contaminate.class
@@ -81,6 +83,7 @@ com\xoarasol\projectcosmos\ProjectCosmos.class
 com\xoarasol\projectcosmos\abilities\cosmicbending\SpaceWarp.class
 com\xoarasol\projectcosmos\abilities\earthbending\sandbending\AridEruption$Wave.class
 com\xoarasol\projectcosmos\abilities\laserbending\forcefield\EnergyBolt$1.class
+com\xoarasol\projectcosmos\abilities\waterbending\plantbending\Chlorophyll.class
 com\xoarasol\projectcosmos\abilities\laserbending\combos\PhotonRing.class
 com\xoarasol\projectcosmos\abilities\laserbending\radiation\RadiationBurst$Wave.class
 com\xoarasol\projectcosmos\abilities\laserbending\combos\Ionize.class
@@ -113,5 +116,6 @@ com\xoarasol\projectcosmos\PCElement$7.class
 com\xoarasol\projectcosmos\api\LaserAbility$1.class
 com\xoarasol\projectcosmos\abilities\earthbending\lavabending\MoltenSlicer.class
 com\xoarasol\projectcosmos\PCElement$1.class
+com\xoarasol\projectcosmos\abilities\laserbending\BurstRays$Bolt.class
 com\xoarasol\projectcosmos\abilities\laserbending\radiation\Disintegration.class
 com\xoarasol\projectcosmos\abilities\waterbending\WaterBall.class

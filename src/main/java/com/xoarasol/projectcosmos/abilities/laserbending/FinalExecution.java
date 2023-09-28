@@ -186,7 +186,6 @@ public class FinalExecution extends LaserAbility implements AddonAbility {
 
             for (Entity entity : GeneralMethods.getEntitiesAroundPoint(location, 4)) {
                 if (entity != this.player) {
-                    setRadiance((LivingEntity) entity, this.radianceDuration);
                     DamageHandler.damageEntity(entity, this.player, this.damage, this);
                 }
             }

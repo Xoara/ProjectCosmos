@@ -32,10 +32,10 @@ import com.xoarasol.projectcosmos.abilities.laserbending.forcefield.EnergyBolt;
 import com.xoarasol.projectcosmos.abilities.laserbending.forcefield.Radial;
 import com.xoarasol.projectcosmos.abilities.laserbending.forcefield.VirtusVeil;
 import com.xoarasol.projectcosmos.abilities.laserbending.passives.PhotonBooster;
-import com.xoarasol.projectcosmos.abilities.laserbending.radiation.Contaminate;
-import com.xoarasol.projectcosmos.abilities.laserbending.radiation.Disintegration;
-import com.xoarasol.projectcosmos.abilities.laserbending.radiation.HotSpot;
-import com.xoarasol.projectcosmos.abilities.laserbending.radiation.RadiationBurst;
+import com.xoarasol.projectcosmos.abilities.laserbending.radiation.*;
+import com.xoarasol.projectcosmos.abilities.waterbending.plantbending.Chlorophyll;
+import com.xoarasol.projectcosmos.abilities.waterbending.plantbending.IvySpores;
+import com.xoarasol.projectcosmos.abilities.waterbending.plantbending.VineTangle;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -71,6 +71,13 @@ public class PCAbilityListener implements Listener {
                 case ("TEMPEREDFATE"):
                     new TemperedFate(player);
                     break;
+                //Water
+                case ("VINETANGLE"):
+                    new VineTangle(player);
+                    break;
+                case ("CHLOROPHYLL"):
+                    new Chlorophyll(player);
+                    break;
                 //Fire
                 case ("COMBUSTINGBEAM"):
                     new CombustingBeam(player);
@@ -81,6 +88,9 @@ public class PCAbilityListener implements Listener {
                 //Laser
                 case ("REVERSAL"):
                     Reversal.activate(player);
+                    break;
+                case ("BURSTRAYS"):
+                    new BurstRays(player);
                     break;
                 case ("PHOTONPUNCH"):
                     PhotonPunch.activate(player);
@@ -96,6 +106,9 @@ public class PCAbilityListener implements Listener {
                     break;
                 case ("BARRIER"):
                     new Barrier(player);
+                    break;
+                case ("RADIANTTRAIL"):
+                    new RadiantTrail(player);
                     break;
                 case ("RADIAL"):
                     new Radial(player, true);
@@ -192,6 +205,10 @@ public class PCAbilityListener implements Listener {
                 //Air
                 case ("SPIRITUALSHIFT"):
                     new SpiritualShift(player);
+                    break;
+                //Water
+                case ("IVYSPORES"):
+                    new IvySpores(player);
                     break;
                 //Earth
                 case ("ARIDERUPTION"):

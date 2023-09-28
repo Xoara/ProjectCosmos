@@ -62,6 +62,33 @@ public class ConfigManager {
 
         // -- Water --
 
+        // - Plant-
+
+        //VineTangle
+        config.addDefault("Abilities.Water.Plant.VineTangle.Enabled", true);
+        config.addDefault("Abilities.Water.Plant.VineTangle.Cooldown", 5000);
+        config.addDefault("Abilities.Water.Plant.VineTangle.Damage", 2);
+        config.addDefault("Abilities.Water.Plant.VineTangle.Range", 20);
+        config.addDefault("Abilities.Water.Plant.VineTangle.RootDuration", 5);
+        config.addDefault("Abilities.Water.Plant.VineTangle.CollisionRadius", 1.2);
+
+        //IvySpores
+        config.addDefault("Abilities.Water.Plant.IvySpores.Enabled", true);
+        config.addDefault("Abilities.Water.Plant.IvySpores.Cooldown", 5000);
+        config.addDefault("Abilities.Water.Plant.IvySpores.Damage", 2);
+        config.addDefault("Abilities.Water.Plant.IvySpores.Range", 20);
+        config.addDefault("Abilities.Water.Plant.IvySpores.SourceRange", 10);
+        config.addDefault("Abilities.Water.Plant.IvySpores.CollisionRadius", 1.6);
+        config.addDefault("Abilities.Water.Plant.IvySpores.Slow.Power", 2);
+        config.addDefault("Abilities.Water.Plant.IvySpores.Slow.Duration", 10);
+        config.addDefault("Abilities.Water.Plant.IvySpores.Poison.Power", 2);
+
+        //Chlorophyll
+        config.addDefault("Abilities.Water.Plant.Chlorophyll.Enabled", true);
+        config.addDefault("Abilities.Water.Plant.Chlorophyll.Cooldown", 10000);
+        config.addDefault("Abilities.Water.Plant.Chlorophyll.Duration", 3000);
+        config.addDefault("Abilities.Water.Plant.Chlorophyll.Amplifier", 3);;
+
         // -- Earth --
 
         // - Sand -
@@ -554,6 +581,16 @@ public class ConfigManager {
         config.addDefault("Abilities.Laser.Reversal.ExplosionRadius", 3);
         pkConfig.addDefault("Abilities.Laser.Reversal.DeathMessage", "{victim} did not see {attacker}'s {ability} coming from behind them");
 
+        //BurstRays
+        config.addDefault("Abilities.Laser.BurstRays.Enabled", true);
+        config.addDefault("Abilities.Laser.BurstRays.Cooldown", 7000);
+        config.addDefault("Abilities.Laser.BurstRays.BoltRange", 9);
+        config.addDefault("Abilities.Laser.BurstRays.Damage", 2);
+        config.addDefault("Abilities.Laser.BurstRays.Knockback", 0.3);
+        config.addDefault("Abilities.Laser.BurstRays.AngleTheta", 11);
+        config.addDefault("Abilities.Laser.BurstRays.AnglePhi", 11);
+        pkConfig.addDefault("Abilities.Laser.BurstRays.DeathMessage", "{attacker} sent rays rippling throughout {victim}'s body using {ability}");
+
         //DazzlingRay
         config.addDefault("Abilities.Laser.DazzlingRay.Enabled", true);
         config.addDefault("Abilities.Laser.DazzlingRay.Cooldown", 8000);
@@ -563,6 +600,8 @@ public class ConfigManager {
         config.addDefault("Abilities.Laser.DazzlingRay.Range", 15);
         config.addDefault("Abilities.Laser.DazzlingRay.ChargeTime", 850);
         pkConfig.addDefault("Abilities.Laser.DazzlingRay.DeathMessage", "{victim} was bedazzled by {attacker}'s {ability}");
+
+        // - Forcefield -
 
         //Barrier
         config.addDefault("Abilities.Laser.ForceField.Barrier.Enabled", true);
@@ -636,6 +675,18 @@ public class ConfigManager {
         config.addDefault("Abilities.Laser.Radiation.Contaminate.ChargeTime", 850);
         config.addDefault("Abilities.Laser.Radiation.Contaminate.NauseaDuration", 150);
         config.addDefault("Abilities.Laser.Radiation.Contaminate.WeaknessDuration", 50);
+
+        //RadiantTrail
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.Enabled", true);
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.Cooldown", 10000);
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.Length", 30);
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.Damage", 0.75);
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.RadianceDuration", 150);
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.AbilityDuration", 6000);
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.Radius", 1);
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.ParticleAmount", 2);
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.RandomizerTicks", 6);
+        config.addDefault("Abilities.Laser.Radiation.RadiantTrail.Randomizer", "The higher the randomizer ticks, the less dense the trail particles will be!");
 
         //Disintegration
         config.addDefault("Abilities.Laser.Radiation.Disintegration.Enabled", true);
