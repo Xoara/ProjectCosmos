@@ -68,6 +68,7 @@ This is a ProjectKorra Addon-Abilities PluginPack.
 ## Laser Bending
 - Boost
 - DazzlingRay
+- BurstRays
 - ElectronLance
 - PhotonPunch
 - FinalExecution
