@@ -83,6 +83,9 @@ public class NullSphere extends DarkCosmicAbility implements AddonAbility {
         }
     }
 
+    public boolean isHiddenAbility() {
+        return true;
+    }
 
     @Override
     public void progress() {

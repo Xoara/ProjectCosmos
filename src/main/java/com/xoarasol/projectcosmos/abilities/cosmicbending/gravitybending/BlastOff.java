@@ -81,14 +81,17 @@ public class BlastOff extends GravityAbility implements AddonAbility {
             new ColoredParticle(Color.fromRGB(66, 0, 188), 1.05F).display(origin, 5, 1, 1, 1);
             new ColoredParticle(Color.fromRGB(45, 0, 130), 1.05F).display(origin, 5, 1, 1, 1);
             new ColoredParticle(Color.fromRGB(13, 0, 56), 1.05F).display(origin, 5, 1, 1, 1);
+            origin.getWorld().playSound(origin, Sound.ENTITY_WITHER_HURT, 3, 0);
+
         } else {
             new ColoredParticle(Color.fromRGB(109, 133, 255), 1.05F).display(origin, 5, 1, 1, 1);
             new ColoredParticle(Color.fromRGB(80, 78, 196), 1.05F).display(origin, 5, 1, 1, 1);
             new ColoredParticle(Color.fromRGB(72, 49, 175), 1.05F).display(origin, 5, 1, 1, 1);
+            origin.getWorld().playSound(origin, Sound.ITEM_TRIDENT_RETURN, 3, 0);
+
 
         }
         origin.getWorld().playSound(origin, Sound.ENTITY_GENERIC_EXPLODE, 3, 0);
-        origin.getWorld().playSound(origin, Sound.ITEM_TRIDENT_RETURN, 3, 0);
 
         for (Entity entity : GeneralMethods.getEntitiesAroundPoint(origin, range)) {
             Vector knock = PCMethods.createDirectionalVector(origin, entity.getLocation());
@@ -160,7 +163,8 @@ public class BlastOff extends GravityAbility implements AddonAbility {
 
     @Override
     public String getInstructions() {
-        return "- Tap-Shift > Left-Click! -";
+        return "Place: *Tap Shift*\n" +
+                "Detonate: *Left Click*";
     }
 
     @Override

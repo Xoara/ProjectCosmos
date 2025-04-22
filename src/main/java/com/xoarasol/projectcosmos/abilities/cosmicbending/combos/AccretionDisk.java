@@ -56,6 +56,7 @@ public class AccretionDisk extends GravityAbility implements ComboAbility, Addon
             duration1 = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Combos.AccretionDisk.SlowFalling.Duration");
             amplifier1 = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Combos.AccretionDisk.SlowFalling.Amplifier");
             start();
+            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EVOKER_PREPARE_SUMMON, 0.7f, 0.7f);
         }
     }
 
@@ -95,14 +96,17 @@ public class AccretionDisk extends GravityAbility implements ComboAbility, Addon
 
             if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
                 (new ColoredParticle(Color.fromRGB(0, 0, 0), 1.0F)).display(loc, 1, 0, 0.1, 0);
+                ParticleEffect.SQUID_INK.display(loc, 4, 0, 0, 0, 0.02);
+                loc.getWorld().playSound(loc, Sound.ENTITY_WITHER_HURT, 0.7f, 0f);
             } else {
                 (new ColoredParticle(Color.fromRGB(178, 191, 255), 1.75F)).display(loc, 1, 0, 0.1, 0);
+                ParticleEffect.CLOUD.display(loc, 4, 0, 0, 0, 0.02);
+                loc.getWorld().playSound(loc, Sound.ITEM_TRIDENT_RETURN, 0.7f, 0.7f);
             }
 
-            ParticleEffect.SQUID_INK.display(loc, 4, 0, 0, 0, 0.02);
+
             ParticleEffect.END_ROD.display(loc, 4, 0, 0, 0, 0.02);
 
-            loc.getWorld().playSound(loc, Sound.ENTITY_EVOKER_PREPARE_SUMMON, 0.7f, 0.7f);
             loc.getWorld().playSound(loc, Sound.ENTITY_IRON_GOLEM_REPAIR, 0.7f, 0f);
             loc.subtract(x, 0, z);
         }

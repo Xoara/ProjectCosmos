@@ -51,10 +51,17 @@ public class StarSurge extends CosmicAbility implements AddonAbility {
 
         setFields();
 
-        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 0.6f, 0f);
-        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1.0f, 0.75f);
-        player.getWorld().playSound(player.getLocation(), Sound.ITEM_TRIDENT_RETURN, 0.6f, 0.5f);
-        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_AMBIENT, 1.0f, 1.55f);
+        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 0.6f, 0f);
+            player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1.0f, 0.75f);
+            player.getWorld().playSound(player.getLocation(), Sound.ITEM_TRIDENT_RETURN, 0.6f, 0.5f);
+            player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_AMBIENT, 1.0f, 1.55f);
+        } else {
+            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 0.6f, 0f);
+            player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1.0f, 1.35f);
+            player.getWorld().playSound(player.getLocation(), Sound.ITEM_TRIDENT_RETURN, 0.6f, 1.1f);
+            player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_AMBIENT, 1.0f, 1.8f);
+        }
 
         start();
         this.bPlayer.addCooldown(this);
@@ -100,7 +107,7 @@ public class StarSurge extends CosmicAbility implements AddonAbility {
             return;
         }
         if (this.clicked) {
-            remove();
+            super.remove();
             bPlayer.addCooldown(this);
             return;
         }
@@ -131,7 +138,7 @@ public class StarSurge extends CosmicAbility implements AddonAbility {
         Location loc = location.add(direction.normalize().multiply(speed));
 
         ParticleEffect.END_ROD.display(loc, 3, 0.2, 0.2, 0.2, 0);
-        ParticleEffect.SQUID_INK.display(loc, 2, 0.05, 0.05, 0.05, 0);
+
 
         Vector normal = GeneralMethods.getOrthogonalVector(direction, 0, 1);
         for (double r = 0; r < 2; r += 0.2) {
@@ -147,7 +154,7 @@ public class StarSurge extends CosmicAbility implements AddonAbility {
 
                     (new ColoredParticle(Color.fromRGB(45, 0, 130), 1F)).display(GeneralMethods.getRightSide(loc.clone().add(ortho), 0.25).add(0, 0, 0), 1, 0.05, 0.05, 0.05);
                     (new ColoredParticle(Color.fromRGB(13, 0, 56), 1F)).display(GeneralMethods.getRightSide(loc.clone().add(ortho), 0.25).add(0, 0, 0), 1, 0.05, 0.05, 0.05);
-
+                   ParticleEffect.SQUID_INK.display(loc, 3, 0.05, 0.05, 0.05, 0);
                 } else {
                     (new ColoredParticle(Color.fromRGB(72, 49, 175), 1F)).display(GeneralMethods.getLeftSide(loc.clone().add(ortho), 0.25).add(0, 0, 0), 1, 0.05, 0.05, 0.05);
                     (new ColoredParticle(Color.fromRGB(80, 78, 196), 1F)).display(GeneralMethods.getLeftSide(loc.clone().add(ortho), 0.25).add(0, 0, 0), 1, 0.05, 0.05, 0.05);
@@ -156,7 +163,7 @@ public class StarSurge extends CosmicAbility implements AddonAbility {
 
                     (new ColoredParticle(Color.fromRGB(80, 78, 196), 1F)).display(GeneralMethods.getRightSide(loc.clone().add(ortho), 0.25).add(0, 0, 0), 1, 0.05, 0.05, 0.05);
                     (new ColoredParticle(Color.fromRGB(72, 49, 175), 1F)).display(GeneralMethods.getRightSide(loc.clone().add(ortho), 0.25).add(0, 0, 0), 1, 0.05, 0.05, 0.05);
-
+                   ParticleEffect.CLOUD.display(loc, 3, 0.05, 0.05, 0.05, 0);
                 }
 
             }
@@ -182,8 +189,7 @@ public class StarSurge extends CosmicAbility implements AddonAbility {
             if (this.unbreakable(blocks)) {
                 return;
             } else {
-                ParticleEffect.END_ROD.display(location, 1, 2, 2, 2, 0.3f);
-                ParticleEffect.SMOKE_LARGE.display(location, 1, 2, 2, 2, 0.3f);
+                ParticleEffect.FIREWORKS_SPARK.display(location, 1, 0.2, 0.2, 0.2, 0.2f);
 
                 TempBlock affected = new TempBlock(blocks, Material.AIR);
                 affected.setRevertTime(blockRevertTime);
@@ -237,11 +243,14 @@ public class StarSurge extends CosmicAbility implements AddonAbility {
     }
 
     public String getDescription() {
-        return "This is a powerful Cosmicbending ability. The bender can channel their cosmic energy and create a protoplanetary disk, surging in the direction they fire it. The disk roots and damages all things it passes through. On Impact it can explode blocks!";
+        return "This is a powerful Cosmicbending ability. It allows the user to create a protoplanetary disk that surges towards enemies dealing damage and slowing them." +
+                "The disk will explode on impact with terrain. \n" +
+                "Additionally, cosmicbenders can release bursts of energy from the core of the disk, unleashing destruction in its path.";
     }
 
     public String getInstructions() {
-        return "- Tap-Shift! -";
+        return "Activation: *Tap Shift*\n" +
+                "Bursts of Energy: *Left Click multiple times*";
     }
 
     @Override

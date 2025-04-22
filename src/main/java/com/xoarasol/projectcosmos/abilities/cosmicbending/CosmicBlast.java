@@ -34,7 +34,6 @@ public class CosmicBlast extends CosmicAbility implements AddonAbility {
         EARTH,
         WATER;
     }
-
     private Location location;
     private Location origin;
     private Vector direction;
@@ -73,7 +72,7 @@ public class CosmicBlast extends CosmicAbility implements AddonAbility {
             this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBlast.Damage");
             this.speed = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBlast.Speed") * (ProjectKorra.time_step / 1000F);
             this.collisionRadius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBlast.CollisionRadius");
-            this.knockback = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBlast.CollisionKnockback");
+            this.knockback = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBlast.Knockback");
             this.explosionRadius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBlast.ExplosionRadius");
 
 
@@ -99,7 +98,11 @@ public class CosmicBlast extends CosmicAbility implements AddonAbility {
         if (!isCollision) {
             if (this.rand.nextInt(2) == 0) {
 
-                this.location.getWorld().playSound(this.location, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.6F, 1.45F);
+                if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                    this.location.getWorld().playSound(this.location, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.6F, 1.25F);
+                } else {
+                    this.location.getWorld().playSound(this.location, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.6F, 1.65F);
+                }
 
             }
             for (int i = 0; i <= 2; i++) {
@@ -202,7 +205,7 @@ public class CosmicBlast extends CosmicAbility implements AddonAbility {
                     tb.setRevertTime(300);
                     tempBlocks.add(tb);
 
-                    for (Entity entity : GeneralMethods.getEntitiesAroundPoint(location, 1.5)) {
+                    for (Entity entity : GeneralMethods.getEntitiesAroundPoint(location, 2.5)) {
                         if (entity instanceof  LivingEntity && !entity.getUniqueId().equals(player.getUniqueId())) {
                             DamageHandler.damageEntity(entity, player, damage, this);
                             remove();
@@ -328,12 +331,12 @@ public class CosmicBlast extends CosmicAbility implements AddonAbility {
 
     @Override
     public String getDescription() {
-        return "A basic Cosmic ability! Shoot a cosmic blast at your enemies. This cosmic ability has great defensive capabilities, and reacts differently when colliding with abilities from other elements.";
+        return "CosmicBlast is a fundamental ability for cosmicbenders. It allows the user to fire a blast of cosmic energy, dealing damage.";
     }
 
     @Override
     public String getInstructions() {
-        return "- Use Left-Click! -";
+        return "*Left Click* to fire!";
     }
 
     @Override

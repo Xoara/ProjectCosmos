@@ -36,9 +36,9 @@ public class CosmoscopeVision extends CosmicAbility implements AddonAbility {
         if (!this.bPlayer.canBend(this)) {
             return;
         }
-        this.cooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.CosmoscopeVision.Cooldown");
-        this.duration = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.CosmoscopeVision.Duration");
-        this.vision = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.CosmoscopeVision.NightVisionPower") - 1;
+        this.cooldown = 2000; //ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.CosmoscopeVision.Cooldown");
+        this.duration = 60000; //ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.CosmoscopeVision.Duration");
+        this.vision = 1; //ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.CosmoscopeVision.NightVisionPower") - 1;
         this.uuid = player.getUniqueId();
 
         final CosmicAbility vision = getCosmicVision();
@@ -133,6 +133,11 @@ public class CosmoscopeVision extends CosmicAbility implements AddonAbility {
     }
 
     @Override
+    public boolean isHiddenAbility() {
+        return true;
+    }
+
+    @Override
     public boolean isHarmlessAbility() {
         return true;
     }
@@ -173,11 +178,6 @@ public class CosmoscopeVision extends CosmicAbility implements AddonAbility {
 
     public CosmicAbility getCosmicVision() {
         return this.cosmicvision;
-    }
-
-    @Override
-    public boolean isHiddenAbility() {
-        return true;
     }
 
 

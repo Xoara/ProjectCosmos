@@ -326,8 +326,8 @@ public class MoonFall extends LunarAbility implements AddonAbility {
 
     @Override
     public String getInstructions() {
-        return "- Hold-Shift > Release-Shift when it is charged! -\n" +
-                "- Recall: Hold-Shift again to recall the stream! -";
+        return "*Hold Shift* to charge > Release-Shift\n" +
+                "Recall: *Hold Shift* again to recall the stream! -";
     }
 
     @Override

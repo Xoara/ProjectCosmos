@@ -46,7 +46,7 @@ public class Defiance extends CosmicAbility implements AddonAbility, PassiveAbil
 
     @Override
     public String getDescription() {
-        return "Cosmicbenders are able to defy gravity, therefore negating all kinds of Fall-Damage!";
+        return "Cosmicbenders are able to defy gravity, therefore negating all kinds of falldamage!";
     }
 
     @Override
@@ -71,7 +71,7 @@ public class Defiance extends CosmicAbility implements AddonAbility, PassiveAbil
 
     @Override
     public String getAuthor() {
-        return "Xoara";
+        return "XoaraSol";
     }
 
     @Override

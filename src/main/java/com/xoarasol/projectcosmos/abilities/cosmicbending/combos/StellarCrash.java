@@ -161,7 +161,12 @@ public class StellarCrash extends CosmicAbility implements ComboAbility, AddonAb
                     if (ThreadLocalRandom.current().nextInt(20) == 0) {
                         ParticleEffect.END_ROD.display(loc, 1, 0.1, 0.1, 0.1);
                         loc.getWorld().playSound(loc, Sound.ENTITY_IRON_GOLEM_DAMAGE, 0.45f, 0);
-                        loc.getWorld().playSound(loc, Sound.ENTITY_WITHER_HURT, 0.45f, 0);
+                        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                            loc.getWorld().playSound(loc, Sound.ENTITY_WITHER_HURT, 0.45f, 0);
+                        } else {
+                            loc.getWorld().playSound(loc, Sound.ITEM_TRIDENT_RETURN, 0.45f, 0.6f);
+                        }
+
                     }
                 }
             }
@@ -237,7 +242,9 @@ public class StellarCrash extends CosmicAbility implements ComboAbility, AddonAb
 
     @Override
     public String getDescription() {
-        return "Cosmicbenders can increase their mass exponentially, and send themselves rocketing towards the ground.";
+        return "Cosmicbenders can increase their mass exponentially, and send themselves rocketing towards the ground. \n" +
+                "-\n" +
+                "\"The element of creation heeds my— WHOOPS DAMMIT! ...Alright, are my kneecaps still where they're supposed to be? Thank the stars.\"";
     }
 
     @Override

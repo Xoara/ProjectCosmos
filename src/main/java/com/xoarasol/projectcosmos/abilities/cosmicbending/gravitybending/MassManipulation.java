@@ -387,15 +387,15 @@ public class MassManipulation extends GravityAbility implements AddonAbility {
     @Override
     public String getDescription() {
         return "A master Cosmicbender themselves can change their mass, and how they are affected by gravity!\n" +
-                "- Increased Mass: A Cosmicbender will experience decreased knockback, and nearby entities may feel a slight pull towards the user, but will be sent flying upon contact!\n" +
+                "Increased Mass: A Cosmicbender will experience decreased knockback, and nearby entities may feel a \"slight\" pull towards the user, but will be sent flying upon contact!\n" +
                 "- Decreased Mass: A Cosmicbender will gain many effects which mimic the low-gravity effects on the moon!";
     }
 
     @Override
     public String getInstructions() {
         return "\n" +
-                "- Increased Mass: Left-Click to activate, Hold Shift to pull nearby entities closer to you! -\n" +
-                "- Decreased Mass: Tap-Sneak to activate! -";
+                "Increased Mass: *Left Click* to activate > *Hold Shift* to pull nearby entities closer to you! -\n" +
+                "Decreased Mass: *Tap Shift* to activate! -";
     }
 
     @Override

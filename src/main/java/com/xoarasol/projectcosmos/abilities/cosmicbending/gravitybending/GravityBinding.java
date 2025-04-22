@@ -18,6 +18,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class GravityBinding extends GravityAbility implements AddonAbility {
     private double damage;
     private long stunDuration;
     private int an;
+    private int leviDuration;
 
     private ArrayList<Entity> bound;
 
@@ -58,6 +61,7 @@ public class GravityBinding extends GravityAbility implements AddonAbility {
         this.range = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.GravityBinding.Range");
         this.stunDuration = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.GravityBinding.StunDuration");
         this.damage = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.GravityBinding.Damage");
+        this.leviDuration = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.GravityBinding.LeviDuration");
         this.origin = this.player.getLocation().clone().add(0.0D, 1.0D, 0.0D);
         this.location = this.origin.clone();
         this.bound = new ArrayList<>();
@@ -70,6 +74,11 @@ public class GravityBinding extends GravityAbility implements AddonAbility {
             return;
         }
         if (this.origin.distance(this.location) > this.range) {
+            remove();
+            return;
+        }
+
+        if (!this.bPlayer.canBendIgnoreBindsCooldowns(this)) {
             remove();
             return;
         }
@@ -97,7 +106,9 @@ public class GravityBinding extends GravityAbility implements AddonAbility {
         for (Entity entity : GeneralMethods.getEntitiesAroundPoint(this.location, 1.2D)) {
             if (entity instanceof LivingEntity && entity.getUniqueId() != this.player.getUniqueId()) {
                 DamageHandler.damageEntity(entity, this.damage, (Ability)this);
-                stun((LivingEntity)entity);
+                LivingEntity le = (LivingEntity) entity;
+                le.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, (leviDuration * 20 / 1000), 2 - 1));
+                //stun((LivingEntity)entity);
                 return;
             }
         }
@@ -206,11 +217,11 @@ public class GravityBinding extends GravityAbility implements AddonAbility {
     }
 
     public String getInstructions() {
-        return "- Left-Click! -";
+        return "*Left Click*";
     }
 
     public String getAuthor() {
-        return "Xoara";
+        return "XoaraSol";
     }
 
     public String getVersion() {

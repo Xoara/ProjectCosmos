@@ -85,7 +85,7 @@ public class GalacticRipple extends CosmicAbility implements AddonAbility {
         Location loc = new Location(centre.getWorld(), x, y, z);
 
         ParticleEffect.END_ROD.display(loc, 2, 0, 0.5, 0, 0f);
-        ParticleEffect.SQUID_INK.display(loc, 3, 0, 0, 0, 0.02);
+
 
         if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
             (new ColoredParticle(Color.fromRGB(13, 0, 56), 1.45F)).display(GeneralMethods.getLeftSide(loc, .70).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
@@ -93,12 +93,14 @@ public class GalacticRipple extends CosmicAbility implements AddonAbility {
             (new ColoredParticle(Color.fromRGB(66, 0, 188), 1.45F)).display(loc, 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(45, 0, 130), 1.45F)).display(GeneralMethods.getRightSide(loc, .35).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(13, 0, 56), 1.45F)).display(GeneralMethods.getRightSide(loc, .70).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
+            ParticleEffect.SQUID_INK.display(loc, 3, 0, 0, 0, 0.02);
         } else {
             (new ColoredParticle(Color.fromRGB(72, 49, 175), 1.45F)).display(GeneralMethods.getLeftSide(loc, .70).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(80, 78, 196), 1.45F)).display(GeneralMethods.getLeftSide(loc, .35).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(109, 133, 255), 1.45F)).display(loc, 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(80, 78, 196), 1.45F)).display(GeneralMethods.getRightSide(loc, .35).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(72, 49, 175), 1.45F)).display(GeneralMethods.getRightSide(loc, .70).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
+            ParticleEffect.CLOUD.display(loc, 3, 0, 0, 0, 0.02);
         }
 
         double x2 = centre.getX() + (radius * -Math.cos(angle));
@@ -107,21 +109,24 @@ public class GalacticRipple extends CosmicAbility implements AddonAbility {
         Location loc2 = new Location(centre.getWorld(), x2, y2, z2);
 
         ParticleEffect.END_ROD.display(loc2, 2, 0, 0.5, 0, 0);
-        ParticleEffect.SQUID_INK.display(loc2, 3, 0, 0, 0, 0.02);
+
         if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
             (new ColoredParticle(Color.fromRGB(13, 0, 56), 1.45F)).display(GeneralMethods.getLeftSide(loc2, .70).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(45, 0, 130), 1.45F)).display(GeneralMethods.getLeftSide(loc2, .35).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(66, 0, 188), 1.45F)).display(loc2, 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(45, 0, 130), 1.45F)).display(GeneralMethods.getRightSide(loc2, .35).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(13, 0, 56), 1.45F)).display(GeneralMethods.getRightSide(loc2, .70).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
+            ParticleEffect.SQUID_INK.display(loc2, 3, 0, 0, 0, 0.02);
+            loc2.getWorld().playSound(loc2, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.3F, 0.62F);
         } else {
             (new ColoredParticle(Color.fromRGB(72, 49, 175), 1.45F)).display(GeneralMethods.getLeftSide(loc2, .70).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(80, 78, 196), 1.45F)).display(GeneralMethods.getLeftSide(loc2, .35).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(109, 133, 255), 1.45F)).display(loc2, 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(80, 78, 196), 1.45F)).display(GeneralMethods.getRightSide(loc2, .35).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
             (new ColoredParticle(Color.fromRGB(72, 49, 175), 1.45F)).display(GeneralMethods.getRightSide(loc2, .70).add(0, 0, 0), 2, 0.05, 0.05, 0.05);
+            ParticleEffect.CLOUD.display(loc2, 3, 0, 0, 0, 0.02);
+            loc2.getWorld().playSound(loc2, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.3F, 1.22F);
         }
-        loc2.getWorld().playSound(loc2, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.3F, 0.62F);
         pstage += 15;
     }
 
@@ -162,12 +167,13 @@ public class GalacticRipple extends CosmicAbility implements AddonAbility {
 
     @Override
     public String getDescription() {
-        return "Cosmicbenders are able to expand their energy as far as outside their body. Use this ability to create an expansion of cosmic energy, that grows over time and does damage!";
+        return "This ability allows cosmicbenders to expand and grow their cosmic energy as far as outside their body to keep enemies at a distance.\n" +
+                "Struck enemies are knocked back and damaged.";
     }
 
     @Override
     public String getInstructions() {
-        return "- Hold-Shift > Left-Click! -";
+        return "*Hold Shift* > *Left Click*";
     }
 
     @Override

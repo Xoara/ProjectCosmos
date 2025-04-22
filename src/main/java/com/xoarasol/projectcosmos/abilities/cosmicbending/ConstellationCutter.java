@@ -1,5 +1,6 @@
 package com.xoarasol.projectcosmos.abilities.cosmicbending;
 
+import com.xoarasol.projectcosmos.PCElement;
 import com.xoarasol.projectcosmos.ProjectCosmos;
 import com.xoarasol.projectcosmos.PCMethods;
 import com.xoarasol.projectcosmos.api.CosmicAbility;
@@ -80,13 +81,26 @@ public class ConstellationCutter extends CosmicAbility implements AddonAbility {
         }
         if (!stars.isEmpty()) {
             for (int id : stars.keySet()) {
-                ParticleEffect.END_ROD.display(stars.get(id), 2, 0.1, 0.1, 0.1);
-                ParticleEffect.CLOUD.display(stars.get(id), 3, 0.0,0.0,0.0);
+
+                if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                    ParticleEffect.SMOKE_NORMAL.display(stars.get(id), 2, 0.1, 0.1, 0.1);
+                    ParticleEffect.SQUID_INK.display(stars.get(id), 3, 0.0,0.0,0.0);
+                } else {
+                    ParticleEffect.END_ROD.display(stars.get(id), 2, 0.1, 0.1, 0.1);
+                    ParticleEffect.CLOUD.display(stars.get(id), 3, 0.0,0.0,0.0);
+                }
 
                 if (ThreadLocalRandom.current().nextInt(blastInterval) == 0) {
                     ParticleEffect.FLASH.display(stars.get(id), 1, 0, 0, 0);
-                    stars.get(id).getWorld().playSound(stars.get(id), Sound.ENTITY_VEX_HURT, 1, 0);
-                    stars.get(id).getWorld().playSound(stars.get(id), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1, 1.75f);
+
+                    if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                        stars.get(id).getWorld().playSound(stars.get(id), Sound.ENTITY_WITHER_AMBIENT, 0.4f, 1.25f);
+                        stars.get(id).getWorld().playSound(stars.get(id), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1, 1.25f);
+                    } else {
+                        stars.get(id).getWorld().playSound(stars.get(id), Sound.ENTITY_VEX_HURT, 1, 0);
+                        stars.get(id).getWorld().playSound(stars.get(id), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1, 1.75f);
+                    }
+
 
                     for (Entity entity : GeneralMethods.getEntitiesAroundPoint(stars.get(id), blastRadius)) {
                         if (entity instanceof LivingEntity && !entity.getUniqueId().equals(player.getUniqueId())) {
@@ -132,8 +146,6 @@ public class ConstellationCutter extends CosmicAbility implements AddonAbility {
         if (CoreAbility.hasAbility(player, ConstellationCutter.class)) {
             ConstellationCutter cutter = CoreAbility.getAbility(player, ConstellationCutter.class);
             cutter.createStar();
-            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1, 0.66f);
-
         }
     }
 
@@ -149,9 +161,14 @@ public class ConstellationCutter extends CosmicAbility implements AddonAbility {
 
         int starsLeft = maxStars - curStars + 1;
         if (starsLeft == 0) {
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE + "You " + ChatColor.DARK_PURPLE + "can't " + ChatColor.LIGHT_PURPLE + "create any more stars!"));
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE + "You " + ChatColor.DARK_PURPLE + "can't " + ChatColor.LIGHT_PURPLE + "create any more objects!"));
         } else {
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE + "You can create " + ChatColor.DARK_PURPLE + starsLeft + ChatColor.LIGHT_PURPLE + " more stars!"));
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE + "You can create " + ChatColor.DARK_PURPLE + starsLeft + ChatColor.LIGHT_PURPLE + " more objects!"));
+        }
+        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_HURT, 0.4f, 0.60f);
+        } else {
+            player.getWorld().playSound(player.getLocation(), Sound.ITEM_TRIDENT_RETURN, 1, 0.75f);
         }
     }
 
@@ -207,12 +224,13 @@ public class ConstellationCutter extends CosmicAbility implements AddonAbility {
 
     @Override
     public String getDescription() {
-        return "Cosmicbenders can create small stellar objects, which will fire beams towards eachother, damaging anything in their path.";
+        return "Cosmicbenders can create miniature stellar objects to form a constellation, which will fire beams towards eachother, dealing damage in their path.";
     }
 
     @Override
     public String getInstructions() {
-        return "- Tap-Shift > Left-Click multiple times in different directions! -";
+        return "Activation: *Tap Shift* \n" +
+                "Creation: *Left Click* multiple times to create a constellation";
     }
 
     @Override

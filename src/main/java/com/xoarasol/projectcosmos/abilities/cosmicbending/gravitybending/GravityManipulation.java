@@ -354,13 +354,14 @@ public class GravityManipulation extends GravityAbility implements AddonAbility 
 
     @Override
     public String getDescription() {
-        return "GravityManipulation is one of Cosmicbending's most primitive moves. At will, Cosmicbenders are able to manipulate the gravity of the blocks around them, and toss them at great speeds.\n" +
-                "Left-Click to send the GravityManipulation backwards!";
+        return "GravityManipulation is one of Cosmicbending's most primitive moves. At will," +
+                " Cosmicbenders are able to manipulate the gravity of the blocks around them, and toss them at great speeds.";
     }
 
 
     @Override
     public String getInstructions() {
-        return "- Hold-Shift at a block to source, and Release-Shift to launch the block. -";
+        return "*Hold Shift* at a block to source > *Release Shift* to throw the block\n" +
+                "Recall: *Left Click* after throwing to launch the block backwards";
     }
 }

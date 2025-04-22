@@ -1,63 +1,10 @@
 name: ProjectCosmos
 main: com.xoarasol.projectcosmos.ProjectCosmos
-version: v0.5.4
-authors: [ 'Wilson & Xoara' ]
+version: 2.0
+authors: [ 'Wilson & XoaraSol' ]
 depend: [ 'ProjectKorra' ]
-api-version: 1.19
+api-version: 1.21.4
 permissions:
-  bending.pcabilities:
-    default: true
-    description: Grants access to all Elemental abilities from ProjectCosmos.
-    children:
-      bending.ability.howlinggale: true
-      bending.ability.temperedfate: true
-      bending.ability.spiritualshift: true
-      bending.ability.moltenslicer: true
-      bending.ability.dustspout: true
-      bending.ability.arideruption: true
-      bending.ability.boltstream: true
-      bending.ability.electricdischarge: true
-      bending.ability.voltaicpulse: true
-      bending.ability.combustingbeam: true
-      bending.ability.ivyspores: true
-      bending.ability.vinetangle: true
-  bending.laser:
-    default: true
-    description: Grants access to all Laserbending abilities.
-    children:
-      bending.laser.forcefieldbending: true
-      bending.laser.radiationbending: true
-      bending.laser.passive: true
-      bending.laser.combos: true
-      bending.ability.decontaminate: true
-      bending.ability.dispersion: true
-      bending.ability.fallout: true
-      bending.ability.ionize: true
-      bending.ability.photonring: true
-      bending.ability.systemicshock: true
-      bending.ability.photonbooster: true
-      bending.ability.irradiation: true
-      bending.ability.updraft: true
-      bending.ability.barrier: true
-      bending.ability.energybolt: true
-      bending.ability.radial: true
-      bending.ability.virtusveil: true
-      bending.ability.contaminate: true
-      bending.ability.disintegration: true
-      bending.ability.hotspot: true
-      bending.ability.radianttrail: true
-      bending.ability.radiationburst: true
-      bending.ability.boost: true
-      bending.ability.burstrays: true
-      bending.ability.dazzlingray: true
-      bending.ability.electronlance: true
-      bending.ability.finalexecution: true
-      bending.ability.laserfission: true
-      bending.ability.lasergaze: true
-      bending.ability.laserjolts: true
-      bending.ability.photonpunch: true
-      bending.ability.razorlaser: true
-      bending.ability.reversal: true
   bending.cosmic:
     default: true
     description: Grants access to all Cosmicbending abilities.
@@ -89,7 +36,6 @@ permissions:
       bending.ability.constellationcutter: true
       bending.ability.cosmicblast: true
       bending.ability.cosmicseeker: true
-      bending.ability.cosmoscopevision: true
       bending.ability.eventhorizon: true
       bending.ability.galacticripple: true
       bending.ability.spacewarp: true

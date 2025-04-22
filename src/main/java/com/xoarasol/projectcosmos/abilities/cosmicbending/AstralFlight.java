@@ -78,7 +78,11 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
             VoidRings2(60, 1.0F, 4);
             VoidRings3(60, 1.2F, 4);
 
-            loc.getWorld().playSound(loc, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.1F, 1.15F);
+            if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                loc.getWorld().playSound(loc, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.1F, 1.15F);
+            } else {
+                loc.getWorld().playSound(loc, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.1F, 1.45F);
+            }
         }
         allowFlight();
         return;
@@ -90,13 +94,9 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
             ParticleEffect.WHITE_ASH.display(loc, 10, (float) Math.random() / 1F, (float) 0.5F, (float) Math.random() / 1F, 0.02);
 
             if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
-
                 (new ColoredParticle(Color.fromRGB(66, 0, 188), 1.8F)).display(loc, 3, 1.1, 1.1, 1.1);
-
             } else {
-
                 (new ColoredParticle(Color.fromRGB(109, 133, 255), 1.8F)).display(loc, 3, 1.1, 1.1, 1.1);
-
             }
 
         }
@@ -120,11 +120,11 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
             Location loc = this.player.getLocation().add(x, -0.25D, z);
             if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
 
-                (new ColoredParticle(Color.fromRGB(45, 0, 130), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(45, 0, 130), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             } else {
 
-                (new ColoredParticle(Color.fromRGB(80, 78, 196), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(80, 78, 196), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             }
         }
@@ -141,11 +141,11 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
             Location loc = this.player.getLocation().add(x, -0.25D, z);
             if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
 
-                (new ColoredParticle(Color.fromRGB(13, 0, 56), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(13, 0, 56), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             } else {
 
-                (new ColoredParticle(Color.fromRGB(72, 49, 175), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(72, 49, 175), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             }
         }
@@ -162,11 +162,11 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
             Location loc = this.player.getLocation().add(x, -0.25D, z);
             if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
 
-                (new ColoredParticle(Color.fromRGB(66, 0, 188), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(66, 0, 188), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             } else {
 
-                (new ColoredParticle(Color.fromRGB(109, 133, 255), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(109, 133, 255), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             }
         }
@@ -183,11 +183,11 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
             Location loc = this.player.getLocation().add(x, 0.05D, z);
             if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
 
-                (new ColoredParticle(Color.fromRGB(45, 0, 130), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(45, 0, 130), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             } else {
 
-                (new ColoredParticle(Color.fromRGB(80, 78, 196), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(80, 78, 196), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             }
         }
@@ -204,11 +204,11 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
             Location loc = this.player.getLocation().add(x, 0.05D, z);
             if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
 
-                (new ColoredParticle(Color.fromRGB(66, 0, 188), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(66, 0, 188), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             } else {
 
-                (new ColoredParticle(Color.fromRGB(109, 133, 255), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(109, 133, 255), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             }
         }
@@ -225,11 +225,11 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
             Location loc = this.player.getLocation().add(x, 0.05D, z);
             if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
 
-                (new ColoredParticle(Color.fromRGB(66, 0, 188), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(66, 0, 188), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             } else {
 
-                (new ColoredParticle(Color.fromRGB(109, 133, 255), 1.3F)).display(loc, 2, 0.05, 0.05, 0.05);
+                (new ColoredParticle(Color.fromRGB(109, 133, 255), 1.3F)).display(loc, 1, 0.05, 0.05, 0.05);
 
             }
         }
@@ -258,9 +258,8 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
     @Override
     public void remove() {
         removeFlight();
-        location.getWorld().playSound(location, Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 1F, 0.76F);
-        Location loc = player.getLocation().clone().add(0, 0, 0);
-        ParticleEffect.SMOKE_NORMAL.display(loc, 20, (float) Math.random() / 1F, (float) 0.5F, (float) Math.random() / 1F, 0.02F);
+        location.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 1F, 0.76F);
+        ParticleEffect.SMOKE_LARGE.display(player.getLocation(), 20, (float) Math.random() / 1F, (float) 0.5F, (float) Math.random() / 1F, 0.02F);
         bPlayer.addCooldown(this);
         super.remove();
     }
@@ -301,12 +300,13 @@ public class AstralFlight extends CosmicAbility implements AddonAbility {
     }
 
     public String getDescription() {
-        return "Cosmicbenders are able to defy gravity, making them able to levitate in the air or fly really quickly!";
+        return "AstralFlight is a core utility move for cosmicbenders. They can create a null zone beneath their feet, allowing them" +
+                "to fly.";
     }
 
     public String getInstructions() {
-        return "- Tap-Shift! - \n" +
-                "- Deactivation: Left-Click! -";
+        return "Activation: *Tap Shift* \n" +
+                "Deactivation: *Left Click*";
     }
 
     @Override

@@ -253,7 +253,7 @@ public class Pulsar extends SolarAbility implements AddonAbility {
 
     @Override
     public String getInstructions() {
-        return "- Hold-Shift! -";
+        return "*HoldShift*";
     }
 
     @Override

@@ -82,9 +82,6 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
         if ((player.isSneaking()) && (!shoot)) {
             displayYingYang();
             displayPoints();
-            horizon();
-            horizon2();
-            horizon3();
         } else {
             if (!charged) {
                 remove();
@@ -100,9 +97,16 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
     private void Energy() {
         for (int j = 0; j < 2; j++) {
             location = location.add(direction.multiply(1));
-            location.getWorld().playSound(location, Sound.ITEM_TRIDENT_THUNDER, 0.8F, 1.90F);
-            location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 0.8F, 0.75F);
-            location.getWorld().playSound(location, Sound.AMBIENT_BASALT_DELTAS_MOOD, 0.8F, 2F);
+
+            if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                location.getWorld().playSound(location, Sound.ITEM_TRIDENT_THUNDER, 0.8F, 1.20F);
+                location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 0.8F, 0.75F);
+                location.getWorld().playSound(location, Sound.AMBIENT_BASALT_DELTAS_MOOD, 0.8F, 2F);
+            } else {
+                location.getWorld().playSound(location, Sound.ITEM_TRIDENT_THUNDER, 0.8F, 1.90F);
+                location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 0.8F, 0.75F);
+                location.getWorld().playSound(location, Sound.AMBIENT_BASALT_DELTAS_MOOD, 0.8F, 2F);
+            }
 
             growth += this.growing;
             if (origin.distance(location) >= range) {
@@ -134,17 +138,19 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
                 tempLoc.add(newDir);
                 tempLoc.setY(tempLoc.getY() + (growth * Math.sin(Math.toRadians(i))));
 
-                ParticleEffect.SQUID_INK.display(this.location, 1, 0.1, 0.1, 0.1);
                 ParticleEffect.END_ROD.display(tempLoc, 1, (float) Math.random() / 2, (float) Math.random() / 2,(float) Math.random() / 2, 0);
 
                 if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
                     new ColoredParticle(Color.fromRGB(66, 0, 188), 2.45F).display(tempLoc, 1, (float) Math.random() / 2, (float) Math.random() / 2, (float) Math.random() / 2);
                     new ColoredParticle(Color.fromRGB(45, 0, 130), 2.45F).display(tempLoc, 1, (float) Math.random() / 2, (float) Math.random() / 2, (float) Math.random() / 2);
                     new ColoredParticle(Color.fromRGB(13, 0, 56), 2.45F).display(tempLoc, 1, (float) Math.random() / 2, (float) Math.random() / 2, (float) Math.random() / 2);
+                    ParticleEffect.SQUID_INK.display(this.location, 1, 0.1, 0.1, 0.1);
+
                 } else {
                     new ColoredParticle(Color.fromRGB(109, 133, 255), 2.45F).display(tempLoc, 1, (float) Math.random() / 2, (float) Math.random() / 2, (float) Math.random() / 2);
                     new ColoredParticle(Color.fromRGB(80, 78, 196), 2.45F).display(tempLoc, 1, (float) Math.random() / 2, (float) Math.random() / 2, (float) Math.random() / 2);
                     new ColoredParticle(Color.fromRGB(72, 49, 175), 2.45F).display(tempLoc, 1, (float) Math.random() / 2, (float) Math.random() / 2, (float) Math.random() / 2);
+                    ParticleEffect.CLOUD.display(this.location, 1, 0.1, 0.1, 0.1);
 
                 }
 
@@ -156,10 +162,7 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
                         for (Entity entity : GeneralMethods.getEntitiesAroundPoint(tempLoc, 1.2)) {
                             if (entity instanceof LivingEntity && entity.getEntityId() != player.getEntityId() && !(entity instanceof ArmorStand)) {
                                 DamageHandler.damageEntity(entity, damage, this);
-                                ParticleEffect.END_ROD.display(entity.getLocation(), 15, (float) Math.random() / 2,(float) Math.random() / 2, (float) Math.random() / 2, 0.3F);
-                                GeneralMethods.displayColoredParticle("370099", tempLoc, 1, (float) Math.random() / 2,(float) Math.random() / 2, (float) Math.random());
-                                GeneralMethods.displayColoredParticle("370099", tempLoc, 1, (float) Math.random() / 2,(float) Math.random() / 2, (float) Math.random());
-                                entity.getLocation().getWorld().playSound(entity.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 0.2F);
+
                                 GeneralMethods.setVelocity(this, entity, this.location.getDirection().normalize().multiply(knockback));
                             }
                         }
@@ -179,6 +182,9 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
             location = GeneralMethods.getTargetedLocation(player, 1);
             origin = GeneralMethods.getTargetedLocation(player, 1);
             direction = GeneralMethods.getTargetedLocation(player, 1).getDirection();
+            horizon();
+            horizon2();
+            horizon3();
 
             ParticleEffect.END_ROD.display(new Location(centre.getWorld(), x, centre.getY(), z), 1,  0F, 0F, 0F, 0);
 
@@ -193,21 +199,32 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
             pstage++;
         }
         if (charged) {
-            Location centre = player.getLocation().clone().add(0, 1, 0);
+            Location centre = player.getEyeLocation().clone().add(0, 1, 0);
             double increment = (1 * Math.PI) / 20;
             double angle = pstage * increment;
-            double x = centre.getX() + (1.3 * Math.cos(angle));
-            double z = centre.getZ() + (1.3 * Math.sin(angle));
+            double x = centre.getX() + (0.3 * Math.cos(angle));
+            double z = centre.getZ() + (0.3 * Math.sin(angle));
             location = GeneralMethods.getTargetedLocation(player, 1);
             origin = GeneralMethods.getTargetedLocation(player, 1);
             direction = GeneralMethods.getTargetedLocation(player, 1).getDirection();
+            horizon();
+            horizon2();
+            horizon3();
 
-            ParticleEffect.END_ROD.display(new Location(centre.getWorld(), x, centre.getY(), z), 1,  0F, 0F, 0F, 0);
+            if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                new ColoredParticle(Color.fromRGB(66, 0, 188), 2.45F).display(new Location(centre.getWorld(), x, centre.getY(), z), 1, 0F, 0F, 0F);
+            } else {
+                new ColoredParticle(Color.fromRGB(109, 133, 255), 2.45F).display(new Location(centre.getWorld(), x, centre.getY(), z), 1, 0F, 0F, 0F);
+            };
 
-            double x1 = centre.getX() + (1.3 * -Math.cos(angle));
-            double z1 = centre.getZ() + (1.3 * -Math.sin(angle));
+            double x1 = centre.getX() + (0.3 * -Math.cos(angle));
+            double z1 = centre.getZ() + (0.3 * -Math.sin(angle));
 
-            ParticleEffect.END_ROD.display(new Location(centre.getWorld(), x1, centre.getY(), z1), 1, 0F, 0F, 0F, 0);
+            if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                new ColoredParticle(Color.fromRGB(66, 0, 188), 2.45F).display(new Location(centre.getWorld(), x1, centre.getY(), z1), 1, 0F, 0F, 0F);
+            } else {
+                new ColoredParticle(Color.fromRGB(109, 133, 255), 2.45F).display(new Location(centre.getWorld(), x1, centre.getY(), z1), 1, 0F, 0F, 0F);
+            };
 
             if (pstage >= 360) {
                 pstage = 0;
@@ -341,12 +358,13 @@ public class EventHorizon extends CosmicAbility implements AddonAbility {
 
     @Override
     public String getDescription() {
-        return "Cosmicbenders are able to harness the raw power of a Supermassive Blackhole, summoning a vertical event horizon which they can manipulate!";
+        return "EventHorizon is an advanced cosmicbending ability. It allows them to harness the power of a black hole and " +
+                "summon a vertical event horizon, damaging and disengaging enemies.";
     }
 
     @Override
     public String getInstructions() {
-        return "- Hold-Shift > Release-Shift when it is charged! -";
+        return "*Hold Shift* to charge then *Release Shift* to fire! -";
     }
 
     @Override

@@ -203,7 +203,7 @@ public class LunarClap extends LunarAbility implements AddonAbility {
 
     @Override
     public String getInstructions() {
-        return "- Left-Click! -";
+        return "*Left Click*";
     }
 
     @Override

@@ -96,7 +96,12 @@ public class StellarBreath extends CosmicAbility implements AddonAbility {
             return;
         }
         if (System.currentTimeMillis() < time + duration) {
-            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 1, 1.3f);
+            if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 1, 1.15f);
+            } else {
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 1, 1.65f);
+            }
+
             createBeam();
         } else {
             bPlayer.addCooldown(this);
@@ -221,12 +226,12 @@ public class StellarBreath extends CosmicAbility implements AddonAbility {
 
     @Override
     public String getDescription() {
-        return "With this ability, you can breathe out a stream of cosmic light to damage your targets!";
+        return "With this ability, you can breathe out a stream of cosmic energy to deal continuous damage to your targets!";
     }
 
     @Override
     public String getInstructions() {
-        return "- Hold-Shift! -";
+        return "*Hold Shift*";
     }
 
     @Override

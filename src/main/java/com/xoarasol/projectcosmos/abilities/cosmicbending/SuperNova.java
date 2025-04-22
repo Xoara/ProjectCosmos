@@ -281,7 +281,7 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
     private void playEffect() {
         if (!charged) {
             Location loc = GeneralMethods.getTargetedLocation(player, 5);
-            ParticleEffect.CLOUD.display(loc, 1, 0, 0, 0, 0.005);
+            ParticleEffect.END_ROD.display(loc, 1, 0, 0, 0, 0.005);
             loc.getWorld().playSound(loc, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.4f, 0.90F);
 
             //sphere
@@ -292,13 +292,17 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
                 double angle = p * increment;
                 double x1 = centre.getX() + (/* radius */ 1 * -Math.cos(angle));
                 double z1 = centre.getZ() + (/* radius */ 1 * -Math.sin(angle));
-                ParticleEffect.CLOUD.display(new Location(centre.getWorld(), x1, centre.getY(), z1), 2, 0, 0, 0, 0.04);
+                ParticleEffect.END_ROD.display(new Location(centre.getWorld(), x1, centre.getY(), z1), 2, 0, 0, 0, 0.04);
             }
         } else {
             Location fakeLoc = GeneralMethods.getTargetedLocation(player, 5);
             //Disc
+            if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                ParticleEffect.SQUID_INK.display(fakeLoc, 1, 0.222, 0.222, 0.222, 0.0111f);
+            } else {
+                ParticleEffect.CLOUD.display(fakeLoc, 1, 0.222, 0.222, 0.222, 0.0111f);
+            }
 
-            ParticleEffect.END_ROD.display(fakeLoc, 1, 0.222, 0.222, 0.222, 0.0111f);
             fakeLoc.getWorld().playSound(fakeLoc, Sound.BLOCK_BEACON_AMBIENT, 1f, 0.96F);
 
             fakeLoc.setPitch(0);
@@ -399,12 +403,12 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
     @Override
     public String getDescription() {
         return "This is an extremely advanced Cosmic ability and requires a lot of focus, concentration and inner balance. With this Ability, a grandmaster Cosmicbender is " +
-                "able to create a super nova out of their bare hands, destroying and unmaking EVERYTHING in its path!";
+                "able to create a miniature supernova using of their bare hands, destroying everything in its path.";
     }
 
     @Override
     public String getInstructions() {
-        return "- Hold-Shift + Left-Click > Release-Shift when it is charged! -";
+        return "*Hold Shift* + *Left-Click* to charge > *Release Shift*";
     }
 
     @Override

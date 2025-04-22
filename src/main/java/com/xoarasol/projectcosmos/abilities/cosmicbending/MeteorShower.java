@@ -1,8 +1,5 @@
 package com.xoarasol.projectcosmos.abilities.cosmicbending;
 
-import com.xoarasol.projectcosmos.ProjectCosmos;
-import com.xoarasol.projectcosmos.PCMethods;
-import com.xoarasol.projectcosmos.api.CosmicAbility;
 import com.projectkorra.projectkorra.GeneralMethods;
 import com.projectkorra.projectkorra.ability.AddonAbility;
 import com.projectkorra.projectkorra.ability.CoreAbility;
@@ -13,6 +10,10 @@ import com.projectkorra.projectkorra.util.ColoredParticle;
 import com.projectkorra.projectkorra.util.DamageHandler;
 import com.projectkorra.projectkorra.util.ParticleEffect;
 import com.projectkorra.projectkorra.util.TempBlock;
+import com.xoarasol.projectcosmos.PCElement;
+import com.xoarasol.projectcosmos.PCMethods;
+import com.xoarasol.projectcosmos.ProjectCosmos;
+import com.xoarasol.projectcosmos.api.CosmicAbility;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -88,18 +89,23 @@ public class MeteorShower extends CosmicAbility implements AddonAbility {
                 ParticleEffect.BLOCK_DUST.display(loc, 5, 0.1, 0.1, 0.1, bData);
                 bData = Bukkit.createBlockData(Material.ANCIENT_DEBRIS);
                 ParticleEffect.BLOCK_DUST.display(loc, 5, 0.1, 0.1, 0.1, bData);
-
-                ParticleEffect.BLOCK_DUST.display(loc, 5, 0.1, 0.1, 0.1, bData);
-                ParticleEffect.FLAME.display(loc, 3, 0.275, 0.275, 0.275);
-                ParticleEffect.BLOCK_DUST.display(loc, 5, 0.1, 0.1, 0.1, bData);
-                ParticleEffect.END_ROD.display(loc, 5, 0.5, 0.5, 0.5, 0.1);
-                ParticleEffect.SMOKE_NORMAL.display(loc, 5, 0.5, 0.5, 0.5);
                 ParticleEffect.FLASH.display(loc, 1, 0, 0, 0);
-                new ColoredParticle(Color.fromRGB(240, 100, 0), 2).display(loc, 6, 0.5, 0.5, 0.5);
-                new ColoredParticle(Color.fromRGB(240, 140, 0), 1.6F).display(loc, 6, 0.5, 0.5, 0.5);
+
+                if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                    ParticleEffect.BLOCK_DUST.display(loc, 5, 0.1, 0.1, 0.1, bData);
+                    ParticleEffect.END_ROD.display(loc, 5, 0.5, 0.5, 0.5, 0.05);
+                    new ColoredParticle(Color.fromRGB(66, 0, 188), 2).display(loc, 6, 0.5, 0.5, 0.5);
+                    new ColoredParticle(Color.fromRGB(45, 0, 130), 1.6F).display(loc, 6, 0.5, 0.5, 0.5);
+                    new ColoredParticle(Color.fromRGB(13, 0, 56), 1.2F).display(loc, 6, 0.5, 0.5, 0.5);
+                } else {
+                    ParticleEffect.BLOCK_DUST.display(loc, 5, 0.1, 0.1, 0.1, bData);
+                    ParticleEffect.END_ROD.display(loc, 5, 0.5, 0.5, 0.5, 0.05);
+                    new ColoredParticle(Color.fromRGB(72, 49, 175), 2).display(loc, 6, 0.5, 0.5, 0.5);
+                    new ColoredParticle(Color.fromRGB(80, 78, 196), 1.6F).display(loc, 6, 0.5, 0.5, 0.5);
+                    new ColoredParticle(Color.fromRGB(109, 133, 255), 1.2F).display(loc, 6, 0.5, 0.5, 0.5);
+                }
 
                 loc.getWorld().playSound(loc, Sound.ENTITY_VEX_HURT, 2, 0);
-                loc.getWorld().playSound(loc, Sound.BLOCK_FIRE_AMBIENT, 1, 0);
 
                 for (Entity entity : GeneralMethods.getEntitiesAroundPoint(loc, 1.5)) {
                     if (entity instanceof LivingEntity && !entity.getUniqueId().equals(player.getUniqueId())) {
@@ -120,9 +126,16 @@ public class MeteorShower extends CosmicAbility implements AddonAbility {
             Vector dir = PCMethods.createDirectionalVector(formLoc, block.getLocation());
 
             ParticleEffect.EXPLOSION_HUGE.display(formLoc, 3, 0.5, 0.5, 0.5);
-            ParticleEffect.FLAME.display(formLoc, 10, 0.5, 0.5, 0.5, 1);
+            ParticleEffect.LAVA.display(formLoc, 10, 0.5, 0.5, 0.5, 1);
             ParticleEffect.FLASH.display(formLoc, 3, 0.5, 0.5, 0.5);
-            formLoc.getWorld().playSound(formLoc, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 3, 0);
+
+            if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                formLoc.getWorld().playSound(formLoc, Sound.ENTITY_WITHER_HURT, 3, 0);
+                formLoc.getWorld().playSound(formLoc, Sound.ENTITY_IRON_GOLEM_HURT, 3, 0);
+            } else {
+                formLoc.getWorld().playSound(formLoc, Sound.ITEM_TRIDENT_RETURN, 3, 0);
+                formLoc.getWorld().playSound(formLoc, Sound.ENTITY_IRON_GOLEM_HURT, 3, 0);
+            }
 
             BlockData bData = Bukkit.createBlockData(Material.MAGMA_BLOCK);
             FallingBlock fBlock = formLoc.getWorld().spawnFallingBlock(formLoc, bData);
@@ -130,8 +143,7 @@ public class MeteorShower extends CosmicAbility implements AddonAbility {
             fBlock.setDropItem(false);
             fBlock.setVelocity(dir.normalize().multiply(speed));
             fBlock.setGlowing(true);
-            fBlock.setMetadata("meteorshower", new FixedMetadataValue(ProjectCosmos.plugin, this));
-
+            fBlock.setMetadata("MeteorShower", new FixedMetadataValue(ProjectCosmos.plugin, this));
             meteors.put(meteorites, fBlock);
             meteorites++;
 
@@ -152,11 +164,16 @@ public class MeteorShower extends CosmicAbility implements AddonAbility {
         Location impactLoc = fBlock.getLocation();
         fBlock.remove();
 
-        ParticleEffect.EXPLOSION_HUGE.display(impactLoc, 3, 0.5, 0.5, 0.5);
-        ParticleEffect.FLAME.display(impactLoc, 1, 0.3 , 0.3, 0.3, 0.5);
-        ParticleEffect.SMOKE_NORMAL.display(impactLoc, 1, 0.3, 0.3, 0.3);
+        ParticleEffect.END_ROD.display(impactLoc, 1, 0.3 , 0.3, 0.3, 0.09);
+        ParticleEffect.SMOKE_LARGE.display(impactLoc, 1, 0.3, 0.3, 0.09);
 
-        impactLoc.getWorld().playSound(impactLoc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
+        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+            impactLoc.getWorld().playSound(impactLoc, Sound.ENTITY_WITHER_HURT, 3, 0);
+        } else {
+            impactLoc.getWorld().playSound(impactLoc, Sound.ITEM_TRIDENT_RETURN, 6, 0);
+        }
+        impactLoc.getWorld().playSound(impactLoc, Sound.ENTITY_GENERIC_EXPLODE, 1, 0);
+
         for (Entity entity : GeneralMethods.getEntitiesAroundPoint(impactLoc, explosionRadius)) {
             if (entity instanceof  LivingEntity && !entity.getUniqueId().equals(player.getUniqueId())) {
                 DamageHandler.damageEntity(entity, player, damage, this);
@@ -247,7 +264,7 @@ public class MeteorShower extends CosmicAbility implements AddonAbility {
 
     @Override
     public String getAuthor() {
-        return "Kwilson272";
+        return "KWilson272";
     }
 
     @Override
@@ -262,6 +279,7 @@ public class MeteorShower extends CosmicAbility implements AddonAbility {
 
     @Override
     public String getInstructions() {
-        return "Tap-Sneak to activate the ability, and left-click at the ground to create a meteorite!";
+        return "Activation: *Tap Shift* \n" +
+                "Summon Meteors: *Left-Click* multile times while aiming at the ground!";
     }
 }

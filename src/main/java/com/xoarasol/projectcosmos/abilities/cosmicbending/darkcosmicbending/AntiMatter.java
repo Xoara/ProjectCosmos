@@ -84,6 +84,9 @@ public class AntiMatter extends DarkCosmicAbility implements AddonAbility {
         regen = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Dark.AntiMatter.BlockDamage.Regen");
         radius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Dark.AntiMatter.BlockDamage.Radius");
     }
+    public boolean isHiddenAbility() {
+        return true;
+    }
 
     @Override
     public void progress() {

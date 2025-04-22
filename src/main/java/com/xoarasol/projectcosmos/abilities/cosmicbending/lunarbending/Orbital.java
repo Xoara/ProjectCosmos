@@ -260,6 +260,6 @@ public class Orbital extends LunarAbility implements AddonAbility {
 
     @Override
     public String getInstructions() {
-        return "Left-Click to activate and deactivate";
+        return "Activation/Deactivation: *Left Click*";
     }
 }

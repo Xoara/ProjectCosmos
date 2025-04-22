@@ -35,15 +35,11 @@ public class Rover extends LunarAbility implements AddonAbility {
     private int ticksTillExplosion;
     private double explosionRadius;
     private double hopPower;
-
     private Minecart cart;
     private BossBar bossBar;
-    private Vector direction;
-
     private int progressCounter;
     private int detonationCounter;
     private double knockback;
-    private int pstage;
 
     public Rover(Player player) {
         super(player);
@@ -51,15 +47,15 @@ public class Rover extends LunarAbility implements AddonAbility {
 
         if (CoreAbility.hasAbility(player, Rover.class)) {
             Rover rover = CoreAbility.getAbility(player, Rover.class);
-            rover.hopa();
+            rover.hop();
             return;
         }
 
         if (this.bPlayer.canBend(this)) {
             this.cooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.Rover.Cooldown");
             this.duration = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Lunar.Rover.Duration");
-            this.speed = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.Rover.Speed");
-            this.damage = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.Rover.Damage");
+            this.speed = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.Rover.Speed");
+            this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.Rover.Damage");
             this.knockback = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.Rover.Knockback");
             this.ticksTillExplosion = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Lunar.Rover.ExplosionTicks");
             this.explosionRadius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.Rover.ExplosionRadius");
@@ -242,13 +238,12 @@ public class Rover extends LunarAbility implements AddonAbility {
     public static void hop(Player player) {
         if (CoreAbility.hasAbility(player, Rover.class)) {
             Rover cs = CoreAbility.getAbility(player, Rover.class);
-            cs.hopa();
+            cs.hop();
             player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 15f, 0.66f);
-            return;
         }
     }
 
-    public void hopa() {
+    public void hop() {
         if (cart.isOnGround() && cart.getPassengers().contains(player)) {
             Vector vec = new Vector(0, 1, 0);
             cart.setVelocity(vec.normalize().multiply(hopPower));
@@ -302,7 +297,8 @@ public class Rover extends LunarAbility implements AddonAbility {
 
     @Override
     public String getInstructions() {
-        return "- Tap-Shift > Right-Click the Rover to hop in!";
+        return "Tap-Shift > Right-Click the Rover to hop in! \n" +
+                "Hop: Left-Click while riding the rover to hop!";
     }
 
     @Override

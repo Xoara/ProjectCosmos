@@ -126,7 +126,7 @@ public class WormHole extends CosmicAbility implements AddonAbility {
                 if (GeneralMethods.isSolid(loc1.getBlock()) || isWater(loc1.getBlock())) {
                     ParticleEffect.FLASH.display(loc1, 3, 0.5, 0.5, 0.5);
                     loc1.getWorld().playSound(loc1, Sound.ENTITY_IRON_GOLEM_REPAIR, 3, 0);
-                    loc1.getWorld().playSound(loc1, Sound.ENTITY_WITHER_HURT, 3, 0);
+                    loc1.getWorld().playSound(loc1, Sound.ITEM_TRIDENT_RETURN, 3, 0.6f);
                     loc1.getWorld().playSound(loc1, Sound.ENTITY_EVOKER_PREPARE_ATTACK, 3, 0.8f);
                     isOnePlaced = true;
                     break;
@@ -428,12 +428,13 @@ public class WormHole extends CosmicAbility implements AddonAbility {
 
     @Override
     public String getDescription() {
-        return "A powerful Cosmicbender can temporarily sever the bounds of time and space to create portals to travel between dimensions.";
+        return "WormHole creation is the strongest feat of strength cosmicbenders can display. They can temporarily" +
+                "sever bounds of space and time, creating a portal that allows anyone to travel through our dimension.";
     }
 
     @Override
     public String getInstructions() {
-        return "- Left-Click to create a portal, Left-Click again to create the second one! -";
+        return "Portal Creation: *Left Click* twice, in different directions to create a portal!";
     }
 
     @Override

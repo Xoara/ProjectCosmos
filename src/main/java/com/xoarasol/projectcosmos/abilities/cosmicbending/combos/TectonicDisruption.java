@@ -76,6 +76,9 @@ public class TectonicDisruption extends GravityAbility implements AddonAbility, 
             }
         }
     }
+    public boolean isHiddenAbility() {
+        return true;
+    }
 
     @Override
     public void progress() {

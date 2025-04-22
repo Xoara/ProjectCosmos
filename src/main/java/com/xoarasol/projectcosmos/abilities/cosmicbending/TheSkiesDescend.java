@@ -151,7 +151,6 @@ public class TheSkiesDescend extends CosmicAbility implements AddonAbility {
                 ParticleEffect.BLOCK_DUST.display(location, 3, 0.5, 0.5, 0.5, bData);
                 ParticleEffect.SQUID_INK.display(location, 3, 0.1, 0.1, 0.1);
                 omens();
-                //new flash particle
                 ParticleEffect.FLASH.display(location, 1, 0, 0, 0);
 
                 location.add(direction.normalize().multiply(speed/3));
@@ -179,10 +178,17 @@ public class TheSkiesDescend extends CosmicAbility implements AddonAbility {
     }
 
     private void explode() {
-        // new sounds
         ParticleEffect.EXPLOSION_HUGE.display(location, 3, 1, 1, 1);
-        location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 10.3F, 0.65f);
-        location.getWorld().playSound(location, Sound.ITEM_TRIDENT_THUNDER, 10.3F, 1.25f);
+        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+            location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 10.3F, 0.65f);
+            location.getWorld().playSound(location, Sound.ITEM_TRIDENT_THUNDER, 10.3F, 1.15f);
+            location.getWorld().playSound(location, Sound.ENTITY_WITHER_HURT, 10.3F, 0f);
+        } else {
+            location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 10.3F, 0.65f);
+            location.getWorld().playSound(location, Sound.ITEM_TRIDENT_THUNDER, 10.3F, 1.55f);
+            location.getWorld().playSound(location, Sound.ITEM_TRIDENT_RETURN, 10.3F, 0.76f);
+        }
+
         for (Entity entity : GeneralMethods.getEntitiesAroundPoint(location, explosionRadius)) {
             if (entity instanceof LivingEntity && !entity.getUniqueId().equals(player.getUniqueId())) {
                 DamageHandler.damageEntity(entity, player, damage, this);
@@ -195,7 +201,7 @@ public class TheSkiesDescend extends CosmicAbility implements AddonAbility {
         }
         for (Block block : GeneralMethods.getBlocksAroundPoint(location, explosionRadius * 1.5)) {
             if (GeneralMethods.isSolid(block) && isAir(block.getRelative(BlockFace.UP).getType())) {
-                TempBlock tb = new TempBlock(block.getRelative(BlockFace.SELF), Material.SCULK);
+                TempBlock tb = new TempBlock(block.getRelative(BlockFace.SELF), Material.MAGMA_BLOCK);
                 tb.setRevertTime(blockRevertTime);
 
                 if (ThreadLocalRandom.current().nextInt(4) == 0) {
@@ -253,12 +259,13 @@ public class TheSkiesDescend extends CosmicAbility implements AddonAbility {
     }
 
     public String getDescription() {
-        return "Advanced Cosmicbenders can summon a constellation's worth of fury, accelerating down to the ground, which damages nearby entities and melts the ground beneath!";
+        return "TheSkiesDescent is a master level cosmicbending ability. It allows cosmicbenders to summon a constellation's worth of fury " +
+                "accelerating down to the ground, which deals damage to enemies, knocks them up and melts the ground beneath!";
     }
 
     @Override
     public String getInstructions() {
-        return "- Tap Shift on the ground!- ";
+        return "*Tap Shift* while aiming at the ground";
     }
 
 

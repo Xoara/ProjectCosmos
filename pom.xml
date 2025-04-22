@@ -31,20 +31,14 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.20.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>
-        <!-- PaperLib -->
-        <dependency>
-            <groupId>io.papermc</groupId>
-            <artifactId>paperlib</artifactId>
-            <version>1.0.1</version>
         </dependency>
         <!-- ProjectKorra -->
         <dependency>
             <groupId>com.projectkorra</groupId>
             <artifactId>projectkorra</artifactId>
-            <version>1.11.2</version>
+            <version>1.12.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/ProjectKorra.jar</systemPath>
         </dependency>

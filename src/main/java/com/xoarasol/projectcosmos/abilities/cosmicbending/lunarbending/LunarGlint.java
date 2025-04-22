@@ -311,7 +311,8 @@ public class LunarGlint extends LunarAbility implements AddonAbility {
 
     @Override
     public String getInstructions() {
-        return "- Left-Click > Hold-Shift to throw yourself at your enemy! -";
+        return "Fire: *LeftClick* \n" +
+                "Strike: *Hold Shift* to throw yourself at your enemy!";
     }
 
     @Override
