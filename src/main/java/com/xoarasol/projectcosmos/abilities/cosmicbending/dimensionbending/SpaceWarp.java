@@ -1,4 +1,4 @@
-package com.xoarasol.projectcosmos.abilities.cosmicbending;
+package com.xoarasol.projectcosmos.abilities.cosmicbending.dimensionbending;
 
 import com.xoarasol.projectcosmos.PCElement;
 import com.xoarasol.projectcosmos.ProjectCosmos;

@@ -1,116 +1,97 @@
 package com.xoarasol.projectcosmos.abilities.cosmicbending;
 
-import com.xoarasol.projectcosmos.PCElement;
-import com.xoarasol.projectcosmos.ProjectCosmos;
-import com.xoarasol.projectcosmos.api.CosmicAbility;
 import com.projectkorra.projectkorra.GeneralMethods;
-import com.projectkorra.projectkorra.ProjectKorra;
 import com.projectkorra.projectkorra.ability.AddonAbility;
-import com.projectkorra.projectkorra.ability.CoreAbility;
+import com.projectkorra.projectkorra.configuration.Config;
+import com.projectkorra.projectkorra.firebending.BlazeArc;
 import com.projectkorra.projectkorra.util.ColoredParticle;
 import com.projectkorra.projectkorra.util.DamageHandler;
 import com.projectkorra.projectkorra.util.ParticleEffect;
-import com.projectkorra.projectkorra.util.TempBlock;
+import com.xoarasol.projectcosmos.ProjectCosmos;
+import com.xoarasol.projectcosmos.api.CosmicAbility;
 import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
+import java.util.Random;
 
 public class SuperNova extends CosmicAbility implements AddonAbility {
 
-    private long cooldown;
-    private long chargeTime;
+    private int cooldown;
     private double range;
-    private double speed;
-    private double radius;
-    private boolean damageBlocks;
-    private boolean revertBlocks;
-    private long revertTime;
     private double damage;
+    public static Config config;
+    private long chargeTime;
 
-    private boolean charged;
+    private boolean hasReached = true;
     private boolean launched;
-    private Vector direction;
-    private Location stream;
-    private Location origin;
-    private double an;
-    private TempBlock tempBlock;
-    private int p;
-    private int p1;
-    private int point;
-    private double yaw;
+    private boolean charged;
 
-    private ArrayList<UUID> affected = new ArrayList<UUID>();
-    private Location loca;
+    private boolean fire;
+    private int fireRadius;
+
+    private double angle;
+
+    private Vector direction;
+    private Location origin;
+    private Location location;
+    private double rotation;
+    private int counter;
+
+    Random rand = new Random();
+    private int pstage;
+    private int an;
 
     public SuperNova(Player player) {
         super(player);
-
-        if (this.bPlayer.canBend(this) && !CoreAbility.hasAbility(player, SuperNova.class)) {
-            this.cooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.SuperNova.Cooldown");
-            this.chargeTime = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.SuperNova.ChargeTime");
-            this.range = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.SuperNova.Range");
-            this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.SuperNova.Damage");
-            this.speed = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.SuperNova.Speed") * (ProjectKorra.time_step / 1000F);
-            this.damageBlocks = ProjectCosmos.plugin.getConfig().getBoolean("Abilities.Cosmic.SuperNova.DamageBlocks.Enabled");
-            this.radius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.SuperNova.DamageBlocks.Radius");
-            this.revertBlocks = ProjectCosmos.plugin.getConfig().getBoolean("Abilities.Cosmic.SuperNova.DamageBlocks.RevertBlocks");
-            this.revertTime = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.SuperNova.DamageBlocks.RevertTime");
-
-            stream = GeneralMethods.getTargetedLocation(player, 1);
-            origin = GeneralMethods.getTargetedLocation(player, 1);
-            direction = GeneralMethods.getTargetedLocation(player, 1).getDirection();
-
-            start();
+        if (!bPlayer.canBend(this)) {
+            return;
         }
+        setFields();
+
+        start();
     }
 
-    static Material[] unbreakables = {Material.BEDROCK, Material.BARRIER, Material.END_PORTAL_FRAME, Material.END_PORTAL, Material.ENDER_CHEST, Material.CHEST, Material.TRAPPED_CHEST};
+    private void setFields() {
 
-    public static boolean isUnbreakable(Block block) {
-        if (block.getState() instanceof InventoryHolder) {
-            return true;
-        }
-        if (Arrays.asList(unbreakables).contains(block.getType())) {
-            return true;
-        }
-        return false;
+        this.cooldown = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.SuperNova.Cooldown");
+        this.chargeTime = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.SuperNova.ChargeTime");
+        this.range = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.SuperNova.Range");
+        this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.SuperNova.Damage");
+
+        rotation = 0;
+        counter = 0;
+
     }
 
     @Override
     public void progress() {
-        if (!this.bPlayer.canBendIgnoreCooldowns(this)) {
+        if (!bPlayer.canBend(this) && (bPlayer.canBendIgnoreBinds(this) && (!bPlayer.canBendIgnoreCooldowns(this)))) {
             remove();
+            return;
+        }
+        if (player.isDead() || !player.isOnline()) {
+            remove();
+            bPlayer.addCooldown(this);
             return;
         }
         if (System.currentTimeMillis() > getStartTime() + chargeTime) {
             charged = true;
         }
-        if (stream.getBlock().getType() == Material.OBSIDIAN || stream.getBlock().getType() == Material.OBSIDIAN) {
-            remove();
-            bPlayer.addCooldown(this);
-            return;
-        }
-        if (origin.distance(stream) >= range) {
-            remove();
-            bPlayer.addCooldown(this);
-            return;
+        if (player.isSneaking() && (charged)) {
+            if (new Random().nextInt(8) == 0) {
+                location.getWorld().playSound(location, Sound.BLOCK_BEACON_ACTIVATE, 0.5F, 0F);
+            }
         }
         if ((player.isSneaking()) && (!launched)) {
-            stream = GeneralMethods.getTargetedLocation(player, 1);
-            origin = GeneralMethods.getTargetedLocation(player, 1);
-            direction = GeneralMethods.getTargetedLocation(player, 1).getDirection();
-            playEffect();
+            charge();
+            displayFireStar();
         } else {
             if (!charged) {
                 remove();
@@ -120,274 +101,183 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
                 bPlayer.addCooldown(this);
                 launched = true;
             }
-            shootSphere();
-        }
-    }
-
-    private void explode(Location loc) {
-        loc.getWorld().playSound(loc, Sound.ENTITY_SHULKER_BULLET_HIT, 0.3F, 0.4F);
-    }
-
-    private void createExplosion(Location loc, double radius, Entity entity) {
-        if (damageBlocks && !isUnbreakable(loc.getBlock()))
-            if (!isTransparent(loc.getBlock()) || entity instanceof LivingEntity) {
-                for (Location l : GeneralMethods.getCircle(loc, (int) radius, 0, false, true, 0)) {
-                    if (!isUnbreakable(l.getBlock())) {
-                        tempBlock = new TempBlock(l.getBlock(), Material.AIR);
-                        explode(stream);
-                        if (revertBlocks)
-                            tempBlock.setRevertTime(revertTime);
-                    }
+            if (GeneralMethods.isSolid(location.getBlock())) {
+                if (BlazeArc.isIgnitable(location.getBlock().getRelative(BlockFace.UP))) {
                 }
+                remove();
+                bPlayer.addCooldown(this);
+                return;
             }
+            Star();
+        }
     }
 
-    @SuppressWarnings("deprecation")
-    private void shootSphere() {
-        direction = player.getEyeLocation().getDirection().normalize();
-        stream = stream.add(direction.normalize().multiply(speed));
-        ParticleEffect.END_ROD.display(stream, 1, .1F, .1F, .1F, 0.02F);
-        ParticleEffect.EXPLOSION_LARGE.display(stream, 2, 1, 1, 1, 0.04);
 
-        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
-            (new ColoredParticle(Color.fromRGB(81, 8, 31), 2.1F)).display(stream, 1, 2, 2, 2);
-            (new ColoredParticle(Color.fromRGB(57, 17, 119), 2.5F)).display(stream, 1, 1.5, 1.5, 1.5);
-            (new ColoredParticle(Color.fromRGB(26, 56, 0), 2.5F)).display(stream, 1, 2, 2, 2);
-            (new ColoredParticle(Color.fromRGB(114, 75, 11), 2.5F)).display(stream, 1, 1.5, 1.5, 1.5);
-            DarkSpirals();
-        } else {
-            (new ColoredParticle(Color.fromRGB(255, 28, 111), 2.1F)).display(stream, 1, 2, 2, 2);
-            (new ColoredParticle(Color.fromRGB(74, 22, 153), 2.5F)).display(stream, 1, 1.5, 1.5, 1.5);
-            (new ColoredParticle(Color.fromRGB(132, 95, 255), 2.5F)).display(stream, 1, 2, 2, 2);
-            (new ColoredParticle(Color.fromRGB(255, 159, 65), 2.5F)).display(stream, 1, 1.5, 1.5, 1.5);
-            LightSpirals();
-        }
+    private void Star() {
+        if (!GeneralMethods.isRegionProtectedFromBuild(player, "SuperNova", location)) {
 
-        Location fakeLoc = stream.clone();
-        fakeLoc.setPitch(0);
-        fakeLoc.setYaw((float) (yaw += 40));
-        Vector direction = fakeLoc.getDirection();
-        for (double j = -180; j <= 180; j += 35) {
-            Location tempLoc = fakeLoc.clone();
-            Vector newDir = direction.clone().multiply(1 * Math.cos(Math.toRadians(j)));
-            tempLoc.add(newDir);
-            tempLoc.setY(tempLoc.getY() + 0 + (1 * Math.sin(Math.toRadians(j))));
-            //sphere
-            ParticleEffect.SMOKE_LARGE.display(tempLoc, 2, 0, 0, 0, 0.2);
-            tempLoc.getWorld().playSound(tempLoc, Sound.AMBIENT_CRIMSON_FOREST_MOOD, 0.75f, 1.85f);
-            tempLoc.getWorld().playSound(tempLoc, Sound.ENTITY_GENERIC_EXPLODE, 0.75f, 0.75F);
-        }
-
-
-        p++;
-        for (int i = -180; i < 180; i += 40) {
-            double angle = (i * Math.PI / 180);
-            double x = 1 * Math.cos(angle + p);
-            double z = 1 * Math.sin(angle + p);
-            Location loc = stream.clone();
-            loc.add(x, 0, z);
-            ParticleEffect.ELECTRIC_SPARK.display(loc, 2, 0, 0, 0, 0.04);
-        }
-
-        p++;
-        Location location = stream.clone();
-        for (int i = -180; i < 180; i += 30) {
-            double angle = (i * Math.PI / 180);
-            double xRotation = 3.141592653589793D / 3 * 2.1;
-            Vector v = new Vector(Math.cos(angle + p), Math.sin(angle + p), 0.0D).multiply(1);
-            Vector v1 = v.clone();
-            rotateAroundAxisX(v, xRotation);
-            rotateAroundAxisY(v, -((location.getYaw() * Math.PI / 180) - 1.575));
-            rotateAroundAxisX(v1, -xRotation);
-            rotateAroundAxisY(v1, -((location.getYaw() * Math.PI / 180) - 1.575));
-
-
-        }
-        for (Entity entity : GeneralMethods.getEntitiesAroundPoint(stream, radius)) {
-            if (entity instanceof LivingEntity && !entity.getUniqueId().equals(player.getUniqueId())) {
-                DamageHandler.damageEntity(entity, damage, this);;
-
+            direction = GeneralMethods.getTargetedLocation(player, 5).getDirection();
+            if (player.isSneaking()) {
+                returnStar();
             }
-        }
-        createExplosion(stream, radius, null);
-    }
-    private void LightSpirals() {
-        this.loca = this.stream.add(this.direction.normalize().multiply(0.4D));
-        this.an += 20.0D;
-        if (this.an > 360.0D)
-            this.an = 0;
-        for (int i = 0; i < 3; i++) {
-            for (double d = -3.0D; d <= 0.0D;
+            origin = player.getLocation().clone().add(0, 5, 0);
+            location.add(direction);
 
-                 d += 3.0D) {
-                Location l = this.loca.clone();
-                double r = d * -5.0D / 5.0D;
-                if (r > 3.0D)
-                    r = 3.0D;
-                Vector ov = GeneralMethods.getOrthogonalVector(this.direction, this.an + (90 * i) + d, r);
-                Location pl = l.clone().add(ov.clone());
-                switch (i) {
-                    case 0:
-                        new ColoredParticle(Color.fromRGB(112, 205, 198), 9.3f).display(pl, 2, 0, 0, 0);
-                        break;
-                    case 1:
-                        new ColoredParticle(Color.fromRGB(112, 205, 198), 9.3f).display(pl, 2, 0, 0, 0);
-                        break;
-                    case 2:
-                        new ColoredParticle(Color.fromRGB(112, 205, 198), 9.3f).display(pl, 2, 0, 0, 0);
-                        break;
-                    case 3:
-                        new ColoredParticle(Color.fromRGB(112, 205, 198), 9.3f).display(pl, 2, 0, 0, 0);
-                        break;
+            (new ColoredParticle(Color.fromRGB(192, 207, 255), 5.0F)).display(location, 1, 0.1D, 0.1D, 0.1D);
+            (new ColoredParticle(Color.fromRGB(103, 111, 137), 5.0F)).display(location, 1, 0.1D, 0.1D, 0.1D);
+            Spirals();
+            Spirals2();
+
+            if (rand.nextInt(6) == 0) {
+                ParticleEffect.FLASH.display(location, 2, 0.2, 0.2, 0.2);
+                location.getWorld().playSound(location, Sound.ENTITY_ILLUSIONER_PREPARE_MIRROR, 0.5F, 0.75F);
+            }
+
+            for (Entity entity : GeneralMethods.getEntitiesAroundPoint(location, 1.75)) {
+                if (entity instanceof LivingEntity && entity.getEntityId() != player.getEntityId()
+                        && !(entity instanceof ArmorStand)) {
+                    DamageHandler.damageEntity(entity, damage, this);
+                    remove();
+                }
+                if (entity instanceof LivingEntity && !entity.getUniqueId().equals(player.getUniqueId())) {
+                    bPlayer.addCooldown(this);
+                    return;
                 }
             }
         }
-    }
+        if (location.getBlock().isLiquid()) {
+            remove();
+            ParticleEffect.FLASH.display(location.getBlock().getLocation(), 2, 0.2, 0.2, 0.2);
+            location.getBlock().getWorld().playSound(location.getBlock().getLocation(), Sound.ENTITY_ILLUSIONER_PREPARE_MIRROR, 2F, 0.75F);
+            bPlayer.addCooldown(this);
+            return;
+        }
 
-    private void DarkSpirals() {
-        this.loca = this.stream.add(this.direction.normalize().multiply(0.4D));
-        this.an += 20.0D;
-        if (this.an > 360.0D)
-            this.an = 0;
-        for (int i = 0; i < 3; i++) {
-            for (double d = -3.0D; d <= 0.0D;
-
-                 d += 3.0D) {
-                Location l = this.loca.clone();
-                double r = d * -5.0D / 5.0D;
-                if (r > 3.0D)
-                    r = 3.0D;
-                Vector ov = GeneralMethods.getOrthogonalVector(this.direction, this.an + (90 * i) + d, r);
-                Location pl = l.clone().add(ov.clone());
-                switch (i) {
-                    case 0:
-                        new ColoredParticle(Color.fromRGB(80, 78, 196), 9.3f).display(pl, 2, 0, 0, 0);
-                        break;
-                    case 1:
-                        new ColoredParticle(Color.fromRGB(80, 78, 196), 9.3f).display(pl, 2, 0, 0, 0);
-                        break;
-                    case 2:
-                        new ColoredParticle(Color.fromRGB(80, 78, 196), 9.3f).display(pl, 2, 0, 0, 0);
-                        break;
-                    case 3:
-                        new ColoredParticle(Color.fromRGB(80, 78, 196), 9.3f).display(pl, 2, 0, 0, 0);
-                        break;
-                }
-            }
+        if (origin.distance(location) > range) {
+            remove();
+            bPlayer.addCooldown(this);
+            return;
+        }
+        if (new Random().nextInt(1) == 0) {
+            location.getWorld().playSound(location, Sound.BLOCK_BEACON_POWER_SELECT, 0.5F, 0.53F);
+            location.getWorld().playSound(location, Sound.ENTITY_EVOKER_PREPARE_SUMMON, 1, 1.65f);
+            location.getWorld().playSound(location, Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST_FAR, 0.5F, 0.0F);
         }
     }
 
-    @SuppressWarnings("deprecation")
-    private void playEffect() {
-        if (!charged) {
+    private void returnStar() {
+        Location loc = this.player.getEyeLocation();
+        Vector dV = loc.getDirection().normalize();
+        loc.add(new Vector(dV.getX() * 6.0D, dV.getY() * 6.0D, dV.getZ() * 6.0D));
+
+        Vector vector = loc.toVector().subtract(location.toVector());
+        this.direction = loc.setDirection(vector).getDirection().normalize();
+    }
+
+    public void charge() {
+        if (charged) {
             Location loc = GeneralMethods.getTargetedLocation(player, 5);
-            ParticleEffect.END_ROD.display(loc, 1, 0, 0, 0, 0.005);
-            loc.getWorld().playSound(loc, Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.4f, 0.90F);
+            grid();
+            angle -= 3;
+            GeneralMethods.displayColoredParticle("C0CFFF", loc, 4, 0.15D, 0.15D, 0.15D);
 
-            //sphere
-
-            if (System.currentTimeMillis() > getStartTime() + chargeTime - 2000L) {
-                Location centre = GeneralMethods.getTargetedLocation(player, 5);
-                double increment = (/* speed */ 2 * Math.PI) / 36;
-                double angle = p * increment;
-                double x1 = centre.getX() + (/* radius */ 1 * -Math.cos(angle));
-                double z1 = centre.getZ() + (/* radius */ 1 * -Math.sin(angle));
-                ParticleEffect.END_ROD.display(new Location(centre.getWorld(), x1, centre.getY(), z1), 2, 0, 0, 0, 0.04);
-            }
-        } else {
-            Location fakeLoc = GeneralMethods.getTargetedLocation(player, 5);
-            //Disc
-            if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
-                ParticleEffect.SQUID_INK.display(fakeLoc, 1, 0.222, 0.222, 0.222, 0.0111f);
-            } else {
-                ParticleEffect.CLOUD.display(fakeLoc, 1, 0.222, 0.222, 0.222, 0.0111f);
-            }
-
-            fakeLoc.getWorld().playSound(fakeLoc, Sound.BLOCK_BEACON_AMBIENT, 1f, 0.96F);
-
-            fakeLoc.setPitch(0);
-            fakeLoc.setYaw((float) (yaw += 40));
-            Vector direction = fakeLoc.getDirection();
-            for (double j = -180; j <= 180; j += 45) {
-                Location tempLoc = fakeLoc.clone();
-                Vector newDir = direction.clone().multiply(1 * Math.cos(Math.toRadians(j)));
-                tempLoc.add(newDir);
-                tempLoc.setY(tempLoc.getY() + 0 + (1 * Math.sin(Math.toRadians(j))));
-
-                ParticleEffect.END_ROD.display(tempLoc, 1, 0.1, 0.1, 0.1);
-            }
-
-
-            p++;
-            for (int i = -180; i < 180; i += 40) {
-                double angle = (i * Math.PI / 180);
-                double x = 1 * Math.cos(angle + p);
-                double z = 1 * Math.sin(angle + p);
-                Location loc = GeneralMethods.getTargetedLocation(player, 5);
-                loc.add(x, 0, z);
-
-            }
-
-            p++;
-            Location location = GeneralMethods.getTargetedLocation(player, 5);
-            for (int i = -180; i < 180; i += 45) {
-                double angle = (i * Math.PI / 180);
-                double xRotation = 3.141592653589793D / 3 * 2.1;
-                Vector v = new Vector(Math.cos(angle + point), Math.sin(angle + point), 0.0D).multiply(1);
-                Vector v1 = v.clone();
-
-                rotateAroundAxisX(v, xRotation);
-                rotateAroundAxisY(v, -((location.getYaw() * Math.PI / 180) - 1.575));
-                rotateAroundAxisX(v1, -xRotation);
-                rotateAroundAxisY(v1, -((location.getYaw() * Math.PI / 180) - 1.575));
-
-            }
-            point++;
         }
-        if (p >= 360) {
-            p = 0;
-        }
-        p++;
-        if (p1 >= 360) {
-            p1 = 0;
-        }
-        p1++;
-        if (point >= 360) {
-            point = 0;
-        }
-        point++;
     }
 
-    private Vector rotateAroundAxisX(Vector v, double angle) {
-        double cos = Math.cos(angle);
-        double sin = Math.sin(angle);
-        double y = v.getY() * cos - v.getZ() * sin;
-        double z = v.getY() * sin + v.getZ() * cos;
-        return v.setY(y).setZ(z);
+    private void Spirals() {
+        this.an += 20;
+        if (this.an > 360)
+            this.an = 0;
+        for (int i = 0; i < 2; i++) {
+            for (double d = -1.0D; d <= 0.0D;
+
+                 d += 0.9D) {
+                Location l = this.location.clone();
+                double r = d * -1.0D / 1.0D;
+                if (r > 0.9D)
+                    r = 0.9D;
+                Vector ov = GeneralMethods.getOrthogonalVector(this.direction, (this.an + 180 * i) + d, r);
+                Location pl = l.clone().add(ov.clone());
+
+
+                switch (i) {
+                    case 0:
+
+                        ParticleEffect.SPELL_INSTANT.display(pl, 4, 0.09, 0.09, 0.09, 0.04);
+
+                        break;
+                    case 1:
+
+                        ParticleEffect.SPELL_INSTANT.display(pl, 4, 0.09, 0, 0.09, 0.04);
+                        break;
+                }
+            }
+        }
     }
 
-    private Vector rotateAroundAxisY(Vector v, double angle) {
-        double cos = Math.cos(angle);
-        double sin = Math.sin(angle);
-        double x = v.getX() * cos + v.getZ() * sin;
-        double z = v.getX() * -sin + v.getZ() * cos;
-        return v.setX(x).setZ(z);
-    }
+    private void Spirals2() {
+        this.an += 20;
+        if (this.an > 360)
+            this.an = 0;
+        for (int i = 0; i < 2; i++) {
+            for (double d = -1.0D; d <= 0.0D;
+
+                 d += 1.9D) {
+                Location l = this.location.clone();
+                double r = d * -1.0D / 1.0D;
+                if (r > 1.0D)
+                    r = 1.0D;
+                Vector ov = GeneralMethods.getOrthogonalVector(this.direction, (this.an + 180 * i) + d, r);
+                Location pl = l.clone().add(ov.clone());
 
 
-    @Override
-    public void remove() {
-        super.remove();
+                switch (i) {
+                    case 0:
+
+                        new ColoredParticle(Color.fromRGB(145, 157, 193), 1.8f).display(pl, 3, 0, 0, 0);
+                        break;
+                    case 1:
+
+                        new ColoredParticle(Color.fromRGB(145, 157, 193), 1.8f).display(pl, 3, 0, 0, 0);
+                        break;
+                }
+            }
+        }
     }
+
+    public void displayFireStar() {
+        if (hasReached) {
+            location = GeneralMethods.getTargetedLocation(player, 5);
+            origin = GeneralMethods.getTargetedLocation(player, 5);
+            (new ColoredParticle(Color.fromRGB(192, 207, 255), 1.0F)).display(location, 1, 0.1D, 0.1D, 0.1D);
+            (new ColoredParticle(Color.fromRGB(103, 111, 137), 1.0F)).display(location, 1, 0.1D, 0.1D, 0.1D);
+
+        }
+    }
+
+    private void grid() {
+        Location centre = GeneralMethods.getTargetedLocation(player, 5);
+        double increment = (2 * Math.PI) / 36;
+        double angle = pstage * increment;
+        double x = centre.getX() + (1.0 * Math.cos(angle));
+        double z = centre.getZ() + (1.0 * Math.sin(angle));
+        Location loc = new Location(centre.getWorld(), x, centre.getY() + 0, z);
+
+        ParticleEffect.SPELL_INSTANT.display(loc, 4, 0.5, 0.1, 0.5, 0f);
+
+        double x2 = centre.getX() + (1 * -Math.cos(angle));
+        double z2 = centre.getZ() + (1 * -Math.sin(angle));
+        Location loc2 = new Location(centre.getWorld(), x2, centre.getY() + 0, z2);
+
+        ParticleEffect.SPELL_INSTANT.display(loc2, 4, 0.5, 0.1, 0.5, 0f);
+
+        pstage++;
+    }
+
 
     @Override
     public long getCooldown() {
         return cooldown;
-    }
-
-    @Override
-    public Location getLocation() {
-        return stream;
     }
 
     @Override
@@ -396,19 +286,17 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
     }
 
     @Override
+    public Location getLocation() {
+        return location;
+    }
+
+    public Location getOrigin() {
+        return origin;
+    }
+
+    @Override
     public String getName() {
         return "SuperNova";
-    }
-
-    @Override
-    public String getDescription() {
-        return "This is an extremely advanced Cosmic ability and requires a lot of focus, concentration and inner balance. With this Ability, a grandmaster Cosmicbender is " +
-                "able to create a miniature supernova using of their bare hands, destroying everything in its path.";
-    }
-
-    @Override
-    public String getInstructions() {
-        return "*Hold Shift* + *Left-Click* to charge > *Release Shift*";
     }
 
     @Override
@@ -423,12 +311,23 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
 
     @Override
     public boolean isExplosiveAbility() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isSneakAbility() {
         return true;
+    }
+
+    @Override
+    public String getDescription() {
+        return "MoonFall in an extremely advanced Lunarbending ability and is very difficult to use. Advanced Lunarbenders are able to access pure moon energy, creating falling lunar blasts.";
+    }
+
+    @Override
+    public String getInstructions() {
+        return "*Hold Shift* to charge > Release-Shift\n" +
+                "Recall: *Hold Shift* again to recall the stream! -";
     }
 
     @Override
@@ -443,7 +342,7 @@ public class SuperNova extends CosmicAbility implements AddonAbility {
 
     @Override
     public String getAuthor() {
-        return "_Hetag1216_ & XoaraSol";
+        return "XoaraSol";
     }
 
     @Override

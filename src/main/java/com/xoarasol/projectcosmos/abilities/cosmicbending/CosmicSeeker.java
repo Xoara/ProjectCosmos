@@ -134,13 +134,13 @@ public class CosmicSeeker extends CosmicAbility implements AddonAbility {
                     if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
                         entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 2.0F, 0F);
                         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 2.0F, 0F);
-                        entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_WITHER_HURT, 2.0F, 0F);
-                        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_HURT, 2.0F, 0F);
+                        entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_WITHER_HURT, 2.0F, 0.55F);
+                        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_HURT, 2.0F, 0.55F);
                     } else {
                         entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 2.0F, 0F);
                         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_IRON_GOLEM_REPAIR, 2.0F, 0F);
-                        entity.getWorld().playSound(entity.getLocation(), Sound.ITEM_TRIDENT_RETURN, 2.0F, 0.6F);
-                        player.getWorld().playSound(player.getLocation(), Sound.ITEM_TRIDENT_RETURN, 2.0F, 0.6F);
+                        entity.getWorld().playSound(entity.getLocation(), Sound.ITEM_TRIDENT_RETURN, 2.5F, 0F);
+                        player.getWorld().playSound(player.getLocation(), Sound.ITEM_TRIDENT_RETURN, 2.5F, 0F);
                     }
                     ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, this.glowDuration, 1));
                     shockwave(entity.getLocation());
@@ -178,12 +178,8 @@ public class CosmicSeeker extends CosmicAbility implements AddonAbility {
                     for (Entity entity : GeneralMethods.getEntitiesAroundPoint(particleLoc, 0.75)) {
                         if (entity instanceof LivingEntity &&
                                 !entity.getUniqueId().equals(player.getUniqueId())) {
-
-                            ((LivingEntity) entity).addPotionEffect(new PotionEffect(
-                                    PotionEffectType.GLOWING,
-                                    glowDuration,
-                                    1
-                            ));
+                            ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, glowDuration, 1));
+                            ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, glowDuration, 2));
                         }
                     }
                 }

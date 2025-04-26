@@ -76,6 +76,19 @@ public class ConfigManager {
         config.addDefault("Abilities.Cosmic.CosmicBlast.ExplosionRadius", 2);
         pkConfig.addDefault("Abilities.Cosmic.CosmicBlast.DeathMessage", "{victim} was blasted out of this dimension by {attacker}'s {ability}");
 
+        //CosmicBinding
+        config.addDefault("Abilities.Cosmic.CosmicBinding.Enabled", true);
+        config.addDefault("Abilities.Cosmic.CosmicBinding.Cooldown", 6700);
+        config.addDefault("Abilities.Cosmic.CosmicBinding.Range", 30);
+        config.addDefault("Abilities.Cosmic.CosmicBinding.ProjectileSpeed", 30);
+        config.addDefault("Abilities.Cosmic.CosmicBinding.Duration", 2000);
+        config.addDefault("Abilities.Cosmic.CosmicBinding.CollisionRadius", 1);
+        config.addDefault("Abilities.Cosmic.CosmicBinding.Pull", 2);
+        config.addDefault("Abilities.Cosmic.CosmicBinding.ImpactRadius", 4);
+        config.addDefault("Abilities.Cosmic.CosmicBinding.Knockback", 1);
+        config.addDefault("Abilities.Cosmic.CosmicBinding.Damage", 3);
+        pkConfig.addDefault("Abilities.Cosmic.CosmicBinding.DeathMessage", "{attacker} killed {victim} on impact using {ability}");
+
         //GalacticRipple
         config.addDefault("Abilities.Cosmic.GalacticRipple.Enabled", true);
         config.addDefault("Abilities.Cosmic.GalacticRipple.Cooldown", 8000);
@@ -90,7 +103,7 @@ public class ConfigManager {
         config.addDefault("Abilities.Cosmic.CosmicSeeker.Enabled", true);
         config.addDefault("Abilities.Cosmic.CosmicSeeker.Cooldown", 3000);
         config.addDefault("Abilities.Cosmic.CosmicSeeker.Range", 75);
-        config.addDefault("Abilities.Cosmic.CosmicSeeker.Damage", 2);
+        config.addDefault("Abilities.Cosmic.CosmicSeeker.Damage", 4);
         config.addDefault("Abilities.Cosmic.CosmicSeeker.GlowDuration", 100);
         pkConfig.addDefault("Abilities.Cosmic.CosmicSeeker.DeathMessage", "{attacker} found and killed {victim} using {ability}");
 
@@ -115,6 +128,17 @@ public class ConfigManager {
         config.addDefault("Abilities.Cosmic.StarSurge.Particles.Distance", 1);
         config.addDefault("Abilities.Cosmic.StarSurge.Slow.Duration", 20);
         config.addDefault("Abilities.Cosmic.StarSurge.Slow.Amplifier", 1);
+
+        //Rover
+        config.addDefault("Abilities.Cosmic.Rover.Enabled", true);
+        config.addDefault("Abilities.Cosmic.Rover.Cooldown", 9000);
+        config.addDefault("Abilities.Cosmic.Rover.Duration", 60);
+        config.addDefault("Abilities.Cosmic.Rover.Speed", 1.5);
+        config.addDefault("Abilities.Cosmic.Rover.Damage", 2);
+        config.addDefault("Abilities.Cosmic.Rover.ExplosionTicks", 30);
+        config.addDefault("Abilities.Cosmic.Rover.ExplosionRadius", 3);
+        config.addDefault("Abilities.Cosmic.Rover.HopPower", 1);
+        pkConfig.addDefault("Abilities.Cosmic.Rover.DeathMessage", "{victim} was run over by Millie Bobby Brown");
 
         //EventHorizon
         config.addDefault("Abilities.Cosmic.EventHorizon.Enabled", true);
@@ -147,15 +171,10 @@ public class ConfigManager {
 
         //SuperNova
         config.addDefault("Abilities.Cosmic.SuperNova.Enabled", true);
-        config.addDefault("Abilities.Cosmic.SuperNova.Cooldown", 25000);
+        config.addDefault("Abilities.Cosmic.SuperNova.Cooldown", 20000);
         config.addDefault("Abilities.Cosmic.SuperNova.ChargeTime", 2500);
+        config.addDefault("Abilities.Cosmic.SuperNova.Damage", 8);
         config.addDefault("Abilities.Cosmic.SuperNova.Range", 30);
-        config.addDefault("Abilities.Cosmic.SuperNova.Damage", 4);
-        config.addDefault("Abilities.Cosmic.SuperNova.Speed", 20);
-        config.addDefault("Abilities.Cosmic.SuperNova.DamageBlocks.Enabled", true);
-        config.addDefault("Abilities.Cosmic.SuperNova.DamageBlocks.Radius", 3);
-        config.addDefault("Abilities.Cosmic.SuperNova.DamageBlocks.RevertBlocks", true);
-        config.addDefault("Abilities.Cosmic.SuperNova.DamageBlocks.RevertTime", 12000);
         pkConfig.addDefault("Abilities.Cosmic.SuperNova.DeathMessage", "{victim} couldn't handle the raw power of {attacker}'s {ability}");
 
         //WormHole
@@ -166,61 +185,6 @@ public class ConfigManager {
         config.addDefault("Abilities.Cosmic.WormHole.Range", 50);
         config.addDefault("Abilities.Cosmic.WormHole.Speed", 30);
         config.addDefault("Abilities.Cosmic.WormHole.TeleportCooldown", 2000);
-
-        // - Lunar -
-
-        //MoonFall
-        config.addDefault("Abilities.Cosmic.Lunar.MoonFall.Enabled", true);
-        config.addDefault("Abilities.Cosmic.Lunar.MoonFall.Cooldown", 10000);
-        config.addDefault("Abilities.Cosmic.Lunar.MoonFall.ChargeTime", 2000);
-        config.addDefault("Abilities.Cosmic.Lunar.MoonFall.Damage", 3);
-        config.addDefault("Abilities.Cosmic.Lunar.MoonFall.Range", 30);
-
-        //LunarClap
-        config.addDefault("Abilities.Cosmic.Lunar.LunarClap.Enabled", true);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarClap.Cooldown", 6500);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarClap.Range", 15);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarClap.Damage", 2);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarClap.Speed", 40);
-
-        //Orbital
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.Enabled", true);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.Cooldown", 6000);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.Radius", 5);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.Duration", 4000);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.Speed", 20);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.Knockback", 1.5);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.ExplosionRadius", 3);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.BlockRevertTime", 7500);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.LunarDamage", 2);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.LunarRadius", 5);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.LunarPullRange", 10);
-        config.addDefault("Abilities.Cosmic.Lunar.Orbital.LunarPullFactor", 0.001);
-        pkConfig.addDefault("Abilities.Cosmic.Lunar.Orbital.DeathMessage", "{victim} didn't survive the impact of {attacker}'s {ability}");
-
-        //LunarGlint
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Enabled", true);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Cooldown", 6700);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Range", 30);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.ProjectileSpeed", 30);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Duration", 2000);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.CollisionRadius", 1);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Pull", 2);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.ImpactRadius", 4);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Knockback", 1);
-        config.addDefault("Abilities.Cosmic.Lunar.LunarGlint.Damage", 3);
-        pkConfig.addDefault("Abilities.Cosmic.Lunar.LunarGlint.DeathMessage", "{attacker} killed {victim} on impact using {ability}");
-
-        //Rover
-        config.addDefault("Abilities.Cosmic.Lunar.Rover.Enabled", true);
-        config.addDefault("Abilities.Cosmic.Lunar.Rover.Cooldown", 9000);
-        config.addDefault("Abilities.Cosmic.Lunar.Rover.Duration", 60);
-        config.addDefault("Abilities.Cosmic.Lunar.Rover.Speed", 1.5);
-        config.addDefault("Abilities.Cosmic.Lunar.Rover.Damage", 2);
-        config.addDefault("Abilities.Cosmic.Lunar.Rover.ExplosionTicks", 30);
-        config.addDefault("Abilities.Cosmic.Lunar.Rover.ExplosionRadius", 3);
-        config.addDefault("Abilities.Cosmic.Lunar.Rover.HopPower", 1);
-        pkConfig.addDefault("Abilities.Cosmic.Rover.DeathMessage", "{victim} was ran over by Millie Bobby Brown");
 
         // - Solar -
 

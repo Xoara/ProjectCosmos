@@ -1,4 +1,4 @@
-package com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending;
+package com.xoarasol.projectcosmos.abilities.cosmicbending;
 
 import com.xoarasol.projectcosmos.ProjectCosmos;
 import com.xoarasol.projectcosmos.PCMethods;

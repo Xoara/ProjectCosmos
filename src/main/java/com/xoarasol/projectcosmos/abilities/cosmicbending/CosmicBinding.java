@@ -1,8 +1,5 @@
-package com.xoarasol.projectcosmos.abilities.cosmicbending.lunarbending;
+package com.xoarasol.projectcosmos.abilities.cosmicbending;
 
-import com.xoarasol.projectcosmos.ProjectCosmos;
-import com.xoarasol.projectcosmos.PCMethods;
-import com.xoarasol.projectcosmos.api.LunarAbility;
 import com.projectkorra.projectkorra.GeneralMethods;
 import com.projectkorra.projectkorra.ProjectKorra;
 import com.projectkorra.projectkorra.ability.AddonAbility;
@@ -11,6 +8,10 @@ import com.projectkorra.projectkorra.attribute.Attribute;
 import com.projectkorra.projectkorra.util.ColoredParticle;
 import com.projectkorra.projectkorra.util.DamageHandler;
 import com.projectkorra.projectkorra.util.ParticleEffect;
+import com.xoarasol.projectcosmos.PCElement;
+import com.xoarasol.projectcosmos.PCMethods;
+import com.xoarasol.projectcosmos.ProjectCosmos;
+import com.xoarasol.projectcosmos.api.CosmicAbility;
 import org.bukkit.*;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
@@ -18,7 +19,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class LunarGlint extends LunarAbility implements AddonAbility {
+public class CosmicBinding extends CosmicAbility implements AddonAbility {
 
     @Attribute(Attribute.COOLDOWN)
     private long cooldown;
@@ -48,25 +49,30 @@ public class LunarGlint extends LunarAbility implements AddonAbility {
     private int an;
     private int pstage;
 
-    public LunarGlint(Player player) {
+    public CosmicBinding(Player player) {
         super(player);
 
-        if (this.bPlayer.canBend(this) && !CoreAbility.hasAbility(player, LunarGlint.class)) {
-            this.cooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.LunarGlint.Cooldown");
-            this.range = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.Range");
-            this.speed = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.ProjectileSpeed") * (ProjectKorra.time_step / 1000F);
-            this.duration = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.LunarGlint.Duration");
-            this.radius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.CollisionRadius");
-            this.pull = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.Pull");
-            this.impactRadius = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Lunar.LunarGlint.ImpactRadius");
-            this.knockback = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.Knockback");
-            this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.LunarGlint.Damage");
-            this.onMissCooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.LunarGlint.OnMissCooldown");
+        if (this.bPlayer.canBend(this) && !CoreAbility.hasAbility(player, CosmicBinding.class)) {
+            this.cooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.CosmicBinding.Cooldown");
+            this.range = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBinding.Range");
+            this.speed = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBinding.ProjectileSpeed") * (ProjectKorra.time_step / 1000F);
+            this.duration = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.CosmicBinding.Duration");
+            this.radius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBinding.CollisionRadius");
+            this.pull = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBinding.Pull");
+            this.impactRadius = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.CosmicBinding.ImpactRadius");
+            this.knockback = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBinding.Knockback");
+            this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.CosmicBinding.Damage");
+            this.onMissCooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.CosmicBinding.OnMissCooldown");
 
             this.origin = GeneralMethods.getMainHandLocation(this.player);
             this.location = origin.clone();
             this.direction = origin.getDirection();
-            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1, 0.66f);
+
+            if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_HURT, 0.8f, 0.55f);
+            } else {
+                player.getWorld().playSound(player.getLocation(), Sound.ITEM_TRIDENT_RETURN, 1.2f, 0f);
+            }
 
             start();
         }
@@ -95,15 +101,14 @@ public class LunarGlint extends LunarAbility implements AddonAbility {
                     }
                 }
 
-                new ColoredParticle(Color.fromRGB(191, 207, 255), 2).display(location, 1, 0.1, 0.1, 0.1);
-                new ColoredParticle(Color.fromRGB(188, 205, 255), 2).display(location, 1, 0.1, 0.1, 0.1);
-                new ColoredParticle(Color.fromRGB(165, 171, 206), 2).display(location, 1, 0.1, 0.1, 0.1);
-                Spirals();
-                Spirals2();
+                if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                    DarkSpirals();
+                    location.getWorld().playSound(location, Sound.ENTITY_EVOKER_PREPARE_SUMMON, 0.1f, 1);
+                } else {
+                    LightSpirals();
+                    location.getWorld().playSound(location, Sound.ENTITY_EVOKER_PREPARE_SUMMON, 0.1f, 1.85f);
+                }
 
-                //new sound
-
-                location.getWorld().playSound(location, Sound.ENTITY_EVOKER_PREPARE_SUMMON, 1, 2);
                 location.add(direction.clone().normalize().multiply(speed / 2));
 
             }
@@ -113,19 +118,23 @@ public class LunarGlint extends LunarAbility implements AddonAbility {
                 remove();
                 return;
             }
+
             grid();
             grid2();
 
-            if (this.player.isSneaking() && this.bPlayer.getBoundAbilityName().equalsIgnoreCase("LunarGlint")) {
+            if (this.player.isSneaking() && this.bPlayer.getBoundAbilityName().equalsIgnoreCase("CosmicBinding")) {
                 Vector vec = PCMethods.createDirectionalVector(player.getEyeLocation(), target.getEyeLocation());
                 GeneralMethods.setVelocity(this, player, vec.normalize().multiply(pull));
 
                 BlockData bData = Bukkit.createBlockData(Material.END_STONE);
                 ParticleEffect.BLOCK_DUST.display(player.getLocation(), 2, 0, 0, 0, bData);
                 ParticleEffect.BLOCK_DUST.display(player.getLocation(), 2, 0.3, 0.3, 0.3, bData);
-                new ColoredParticle(Color.fromRGB(192, 207, 255), 2).display(player.getLocation(), 2, 0.3, 0.3, 0.3);
-                new ColoredParticle(Color.fromRGB(188, 205, 255), 2).display(player.getLocation(), 2, 0.3, 0.3, 0.3);
-                new ColoredParticle(Color.fromRGB(165, 171, 206), 2).display(player.getLocation(), 2, 0.3, 0.3, 0.3);
+
+                if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+                    (new ColoredParticle(Color.fromRGB(66, 0, 188), 2.45F)).display(player.getLocation(), 2, 0.05, 0.05, 0.05);
+                } else {
+                    (new ColoredParticle(Color.fromRGB(109, 133, 255), 2.45F)).display(player.getLocation(), 2, 0.05, 0.05, 0.05);
+                }
 
                 if (player.getLocation().distance(target.getLocation()) < 1.5) {
                     impact();
@@ -143,13 +152,21 @@ public class LunarGlint extends LunarAbility implements AddonAbility {
         double z = centre.getZ() + (1.0 * Math.sin(angle));
         Location loc = new Location(centre.getWorld(), x, centre.getY() + 1.2, z);
 
-        new ColoredParticle(Color.fromRGB(192, 207, 255), 1).display(loc, 3, 0, 0, 0);
+        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+            new ColoredParticle(Color.fromRGB(66, 0, 188), 1).display(loc, 3, 0, 0, 0);
+        } else {
+            new ColoredParticle(Color.fromRGB(109, 133, 255), 1).display(loc, 3, 0, 0, 0);
+        }
 
         double x2 = centre.getX() + (1 * -Math.cos(angle));
         double z2 = centre.getZ() + (1 * -Math.sin(angle));
         Location loc2 = new Location(centre.getWorld(), x2, centre.getY() + 1, z2);
 
-        new ColoredParticle(Color.fromRGB(145, 157, 193), 1).display(loc2, 3, 0, 0, 0);
+        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+            new ColoredParticle(Color.fromRGB(45, 0, 130), 1).display(loc2, 3, 0, 0, 0);
+        } else {
+            new ColoredParticle(Color.fromRGB(80, 78, 196), 1).display(loc2, 3, 0, 0, 0);
+        }
 
         pstage++;
     }
@@ -162,84 +179,100 @@ public class LunarGlint extends LunarAbility implements AddonAbility {
         double z = centre.getZ() + (1 * Math.sin(angle));
         Location loc = new Location(centre.getWorld(), x, centre.getY() + 0.8, z);
 
-        new ColoredParticle(Color.fromRGB(103, 111, 137),  1).display(loc, 3, 0, 0, 0);
+        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+            new ColoredParticle(Color.fromRGB(66, 0, 188), 1).display(loc, 3, 0, 0, 0);
+        } else {
+            new ColoredParticle(Color.fromRGB(109, 133, 255), 1).display(loc, 3, 0, 0, 0);
+        }
 
         double x2 = centre.getX() + (1 * -Math.cos(angle));
         double z2 = centre.getZ() + (1 * -Math.sin(angle));
         Location loc2 = new Location(centre.getWorld(), x2, centre.getY() + 0.6, z2);
 
-        new ColoredParticle(Color.fromRGB(145, 157, 193), 1).display(loc2, 3, 0, 0, 0);
+        if (this.getBendingPlayer().canUseSubElement(PCElement.DARK_COSMIC)) {
+            new ColoredParticle(Color.fromRGB(45, 0, 130), 1).display(loc2, 3, 0, 0, 0);
+        } else {
+            new ColoredParticle(Color.fromRGB(80, 78, 196), 1).display(loc2, 3, 0, 0, 0);
+        }
 
         pstage++;
     }
 
-    private void Spirals() {
-        this.an += 20;
-        if (this.an > 360)
+    private void DarkSpirals() {
+        this.location = this.location.add(this.direction.normalize().multiply(0.4D));
+        this.an += 20.0D;
+        if (this.an > 360.0D)
             this.an = 0;
-        for (int i = 0; i < 2; i++) {
-            for (double d = -1.0D; d <= 0.0D;
+        for (int i = 0; i < 4; i++) {
+            for (double d = -4.0D; d <= 0.0D;
 
-                 d += 1.0D) {
+                 d += 5.0D) {
                 Location l = this.location.clone();
-                double r = d * -1.0D / 1.0D;
-                if (r > 0.6D)
-                    r = 0.6D;
-                Vector ov = GeneralMethods.getOrthogonalVector(this.direction, (this.an + 180 * i) + d, r);
+                double r = d * -1.0D / 5.0D;
+                if (r > 1.1D)
+                    r = 1.1D;
+                Vector ov = GeneralMethods.getOrthogonalVector(this.direction, this.an + (90 * i) + d, r);
                 Location pl = l.clone().add(ov.clone());
-
-
                 switch (i) {
                     case 0:
-
-                        new ColoredParticle(Color.fromRGB(145, 157, 193), 1).display(pl, 5, 0.1, 0.1, 0.1);
+                        new ColoredParticle(Color.fromRGB(66, 0, 188), 1.4f).display(pl, 2, 0, 0, 0);
                         break;
                     case 1:
-
-                        new ColoredParticle(Color.fromRGB(145, 157, 193), 1).display(pl, 5, 0.1, 0.1, 0.1);
+                        new ColoredParticle(Color.fromRGB(45, 0, 130), 1.4f).display(pl, 2, 0, 0, 0);
+                        break;
+                    case 2:
+                        new ColoredParticle(Color.fromRGB(13, 0, 56), 1.4f).display(pl, 2, 0, 0, 0);
+                        break;
+                    case 3:
+                        ParticleEffect.SQUID_INK.display(pl, 2, 0, 0, 0);
                         break;
                 }
             }
         }
     }
 
-    private void Spirals2() {
-        this.an += 20;
-        if (this.an > 360)
+    private void LightSpirals() {
+        this.location = this.location.add(this.direction.normalize().multiply(0.4D));
+        this.an += 20.0D;
+        if (this.an > 360.0D)
             this.an = 0;
-        for (int i = 0; i < 2; i++) {
-            for (double d = -2.0D; d <= 0.0D;
+        for (int i = 0; i < 4; i++) {
+            for (double d = -4.0D; d <= 0.0D;
 
-                 d += 2.0D) {
+                 d += 5.0D) {
                 Location l = this.location.clone();
-                double r = d * -1.0D / 1.0D;
-                if (r > 0.8D)
-                    r = 0.8D;
-                Vector ov = GeneralMethods.getOrthogonalVector(this.direction, (this.an + 180 * i) + d, r);
+                double r = d * -1.0D / 5.0D;
+                if (r > 1.1D)
+                    r = 1.1D;
+                Vector ov = GeneralMethods.getOrthogonalVector(this.direction, this.an + (90 * i) + d, r);
                 Location pl = l.clone().add(ov.clone());
-
-
                 switch (i) {
                     case 0:
-
-                        new ColoredParticle(Color.fromRGB(103, 111, 137), 1).display(pl, 5, 0.1, 0.1, 0.1);
+                        ParticleEffect.CLOUD.display(pl, 2, 0, 0, 0);
                         break;
                     case 1:
-
-                        new ColoredParticle(Color.fromRGB(103, 111, 137), 1).display(pl, 5, 0.1, 0.1, 0.1);
+                        new ColoredParticle(Color.fromRGB(109, 133, 255), 1.4f).display(pl, 2, 0, 0, 0);
+                        break;
+                    case 2:
+                        new ColoredParticle(Color.fromRGB(80, 78, 196), 1.4f).display(pl, 2, 0, 0, 0);
+                        break;
+                    case 3:
+                        new ColoredParticle(Color.fromRGB(72, 49, 175), 1.4f).display(pl, 2, 0, 0, 0);
                         break;
                 }
             }
         }
     }
+
+
     private void impact() {
         ParticleEffect.EXPLOSION_HUGE.display(player.getLocation(), 3, 0, 0, 0);
         ParticleEffect.FLASH.display(player.getLocation(), 3, 0.1, 0.1, 0.1);
 
-        BlockData bData = Bukkit.createBlockData(Material.IRON_BLOCK);
+        BlockData bData = Bukkit.createBlockData(Material.END_STONE);
         ParticleEffect.BLOCK_DUST.display(player.getLocation(), 15, impactRadius / 2, impactRadius / 2, impactRadius / 2, bData);
         ParticleEffect.SMOKE_LARGE.display(player.getLocation(), 15, impactRadius / 2, impactRadius / 2, impactRadius / 2, 0.07);
-        ParticleEffect.CLOUD.display(player.getLocation(), 15, impactRadius / 2, impactRadius / 2, impactRadius / 2, 0.07);
+        ParticleEffect.FIREWORKS_SPARK.display(player.getLocation(), 15, impactRadius / 2, impactRadius / 2, impactRadius / 2, 0.07);
 
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EVOKER_PREPARE_SUMMON, 1, 2);
         player.getWorld().playSound(player.getLocation(), Sound.ITEM_TOTEM_USE, 1, 1.25f);
@@ -286,7 +319,7 @@ public class LunarGlint extends LunarAbility implements AddonAbility {
 
     @Override
     public boolean isEnabled() {
-        return ProjectCosmos.plugin.getConfig().getBoolean("Abilities.Cosmic.Lunar.LunarGlint.Enabled");
+        return ProjectCosmos.plugin.getConfig().getBoolean("Abilities.Cosmic.CosmicBinding.Enabled");
     }
 
     @Override
@@ -296,7 +329,7 @@ public class LunarGlint extends LunarAbility implements AddonAbility {
 
     @Override
     public String getName() {
-        return "LunarGlint";
+        return "CosmicBinding";
     }
 
     @Override
@@ -306,13 +339,14 @@ public class LunarGlint extends LunarAbility implements AddonAbility {
 
     @Override
     public String getDescription() {
-        return "Space Hybrids harness the power of Diana, The Goddess Of The Moons. With this energy they can latch onto entities and throw themselves towards them by manipulating their gravitational pull.";
+        return "CosmicBinding is an advanced level ability that allows cosmicbenders to bind themselves onto enemies. After the enemy has been bound and marked," +
+                "the cosmicbender pulls themselves towards them, crashing directly into them!";
     }
 
     @Override
     public String getInstructions() {
-        return "Fire: *LeftClick* \n" +
-                "Strike: *Hold Shift* to throw yourself at your enemy!";
+        return "Bind: Left-Click \n" +
+                "Crash: Hold-Shift to crash into your bound enemy!";
     }
 
     @Override

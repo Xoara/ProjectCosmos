@@ -1,8 +1,5 @@
-package com.xoarasol.projectcosmos.abilities.cosmicbending.lunarbending;
+package com.xoarasol.projectcosmos.abilities.cosmicbending;
 
-import com.xoarasol.projectcosmos.ProjectCosmos;
-import com.xoarasol.projectcosmos.PCMethods;
-import com.xoarasol.projectcosmos.api.LunarAbility;
 import com.projectkorra.projectkorra.GeneralMethods;
 import com.projectkorra.projectkorra.ability.AddonAbility;
 import com.projectkorra.projectkorra.ability.CoreAbility;
@@ -10,6 +7,9 @@ import com.projectkorra.projectkorra.attribute.Attribute;
 import com.projectkorra.projectkorra.util.ColoredParticle;
 import com.projectkorra.projectkorra.util.DamageHandler;
 import com.projectkorra.projectkorra.util.ParticleEffect;
+import com.xoarasol.projectcosmos.PCMethods;
+import com.xoarasol.projectcosmos.ProjectCosmos;
+import com.xoarasol.projectcosmos.api.CosmicAbility;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -22,7 +22,7 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rover extends LunarAbility implements AddonAbility {
+public class Rover extends CosmicAbility implements AddonAbility {
 
     @Attribute(Attribute.COOLDOWN)
     private long cooldown;
@@ -52,14 +52,14 @@ public class Rover extends LunarAbility implements AddonAbility {
         }
 
         if (this.bPlayer.canBend(this)) {
-            this.cooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Lunar.Rover.Cooldown");
-            this.duration = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Lunar.Rover.Duration");
-            this.speed = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.Rover.Speed");
-            this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.Rover.Damage");
-            this.knockback = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.Rover.Knockback");
-            this.ticksTillExplosion = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Lunar.Rover.ExplosionTicks");
-            this.explosionRadius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.Rover.ExplosionRadius");
-            this.hopPower = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Lunar.Rover.HopPower");
+            this.cooldown = ProjectCosmos.plugin.getConfig().getLong("Abilities.Cosmic.Rover.Cooldown");
+            this.duration = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Rover.Duration");
+            this.speed = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Rover.Speed");
+            this.damage = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Rover.Damage");
+            this.knockback = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Rover.Knockback");
+            this.ticksTillExplosion = ProjectCosmos.plugin.getConfig().getInt("Abilities.Cosmic.Rover.ExplosionTicks");
+            this.explosionRadius = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Rover.ExplosionRadius");
+            this.hopPower = ProjectCosmos.plugin.getConfig().getDouble("Abilities.Cosmic.Rover.HopPower");
 
             this.cart = (Minecart) player.getWorld().spawnEntity(player.getLocation(), EntityType.MINECART);
             cart.setInvulnerable(true);
@@ -130,7 +130,7 @@ public class Rover extends LunarAbility implements AddonAbility {
                         int ticksLeft = ticksTillExplosion - detonationCounter;
 
                         Player cartPlayer = Bukkit.getPlayer(entity.getUniqueId());
-                        cartPlayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "* UNAUTHORIZED DRIVER! INNITATING SELF-DESTRUCTION IN " + ticksLeft + "! *"));
+                        cartPlayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "* UNAUTHORIZED DRIVER! INITATING SELF-DESTRUCTION IN " + ticksLeft + "! *"));
                         cartPlayer.getWorld().playSound(cartPlayer.getLocation(), Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE, 1, 0);
 
                         Vector dir = cartPlayer.getEyeLocation().getDirection();
@@ -205,8 +205,8 @@ public class Rover extends LunarAbility implements AddonAbility {
     private void detonate() {
         Location loc = cart.getLocation();
         ParticleEffect.EXPLOSION_HUGE.display(loc, 2, 0.2, 0.2, 0.2);
-        ParticleEffect.CLOUD.display(loc, 15, 0.2, 0.2, 0.2, 0.08);
-        ParticleEffect.SMOKE_LARGE.display(loc, 15, 0.2, 0.2, 0.2, 0.08);
+        ParticleEffect.FIREWORKS_SPARK.display(loc, 15, 1, 1, 1, 0.08);
+        ParticleEffect.SMOKE_LARGE.display(loc, 15, 1, 1, 1, 0.08);
         ParticleEffect.FLASH.display(loc, 1, 1, 1, 1);
         cart.getWorld().playSound(loc, Sound.ENTITY_ENDER_DRAGON_GROWL, 0.5F, 2);
         cart.getWorld().playSound(loc, Sound.ITEM_TOTEM_USE, 0.5F, 1.2f);
@@ -245,8 +245,7 @@ public class Rover extends LunarAbility implements AddonAbility {
 
     public void hop() {
         if (cart.isOnGround() && cart.getPassengers().contains(player)) {
-            Vector vec = new Vector(0, 1, 0);
-            cart.setVelocity(vec.normalize().multiply(hopPower));
+            GeneralMethods.setVelocity(this, player, new Vector(0, hopPower, 0));
         }
     }
 
@@ -292,7 +291,7 @@ public class Rover extends LunarAbility implements AddonAbility {
 
     @Override
     public String getDescription() {
-        return "Master Lunarbenders can summon a moon-rover and use it to trek the terrain around themselves! VROOOOOOOOOOOOM!";
+        return "Summon a moon-rover and use it to trek the terrain! VROOOOOOOOOOOOM!";
     }
 
     @Override

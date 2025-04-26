@@ -22,7 +22,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import static com.xoarasol.projectcosmos.abilities.cosmicbending.SuperNova.isUnbreakable;
 
 public class AntiMatter extends DarkCosmicAbility implements AddonAbility {
 
@@ -141,7 +140,6 @@ public class AntiMatter extends DarkCosmicAbility implements AddonAbility {
                 if (damagesBlocks) {
                     //new TempExplosion(player, location.getBlock(), "AntiMatter", radius, regen, damage, false);
                     for (Location loc : GeneralMethods.getCircle(location, (int) radius, 0, false, true, 0)) {
-                        if (isUnbreakable(loc.getBlock())) continue;
                         TempBlock tb = new TempBlock(loc.getBlock(), Material.AIR);
                         tb.setRevertTime(regen);
                     }

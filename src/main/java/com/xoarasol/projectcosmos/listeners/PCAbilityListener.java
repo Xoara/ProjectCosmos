@@ -6,16 +6,12 @@ import com.projectkorra.projectkorra.ability.util.Collision;
 import com.projectkorra.projectkorra.event.AbilityCollisionEvent;
 import com.xoarasol.projectcosmos.PCElement;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.*;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.darkcosmicbending.AntiMatter;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.darkcosmicbending.NullSphere;
+import com.xoarasol.projectcosmos.abilities.cosmicbending.dimensionbending.CosmicRift;
+import com.xoarasol.projectcosmos.abilities.cosmicbending.dimensionbending.SpaceWarp;
+import com.xoarasol.projectcosmos.abilities.cosmicbending.dimensionbending.WormHole;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.BlastOff;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.GravityBinding;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.GravityManipulation;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.gravitybending.MassManipulation;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.lunarbending.*;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending.CrackOfDawn;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending.Pulsar;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending.SolarCyclone;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,35 +36,17 @@ public class PCAbilityListener implements Listener {
 
             switch (abil.toUpperCase()) {
                 //Cosmic
-                case ("ORBITAL"):
-                    new Orbital(player);
-                    break;
                 case ("METEORSHOWER"):
                     MeteorShower.activate(player);
                     break;
                 case ("MASSMANIPULATION"):
                     new MassManipulation(player, true);
                     break;
-                case ("COSMOSCOPEVISION"):
-                    new CosmoscopeVision(player);
-                    break;
-                case ("LUNARCLAP"):
-                    new LunarClap(player);
-                    break;
-                case ("GRAVITYBINDING"):
-                    new GravityBinding(player);
-                    break;
-                case ("LUNARGLINT"):
-                    new LunarGlint(player);
+                case ("COSMICBINDING"):
+                    new CosmicBinding(player);
                     break;
                 case ("WORMHOLE"):
                     new WormHole(player);
-                    break;
-                case ("PRIMORDIALBURST"):
-                    new GravityBinding(player);
-                    break;
-                case ("SUPERNOVA"):
-                    new SuperNova(player);
                     break;
                 case ("GALACTICRIPPLE"):
                     new GalacticRipple(player);
@@ -99,9 +77,6 @@ public class PCAbilityListener implements Listener {
                     break;
                 case ("SPACEWARP"):
                     new SpaceWarp(player);
-                    break;
-                case ("NULLSPHERE"):
-                    new NullSphere(player);
                     break;
 
                 default:
@@ -139,13 +114,16 @@ public class PCAbilityListener implements Listener {
                     new AstralFlight(player);
                     break;
                 case ("SOLARCYCLONE"):
-                    new SolarCyclone(player);
+                    new Magnetar(player);
                     break;
                 case ("BLASTOFF"):
                     new BlastOff(player);
                     break;
-                case ("MOONFALL"):
-                    new MoonFall(player);
+                case ("SUPERNOVA"):
+                    new SuperNova(player);
+                    break;
+                case ("COSMICRIFT"):
+                    new CosmicRift(player);
                     break;
                 case ("THESKIESDESCEND"):
                     new TheSkiesDescend(player);
@@ -167,12 +145,6 @@ public class PCAbilityListener implements Listener {
                     break;
                 case ("GRAVITYMANIPULATION"):
                     new GravityManipulation(player);
-                    break;
-                case ("COSMOSCOPEVISION"):
-                    CosmoscopeVision.removeVision(player);
-                    break;
-                case ("ANTIMATTER"):
-                    new AntiMatter(player);
                     break;
 
                 default:

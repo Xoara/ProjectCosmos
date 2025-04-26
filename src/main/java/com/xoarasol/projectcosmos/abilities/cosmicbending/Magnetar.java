@@ -1,4 +1,4 @@
-package com.xoarasol.projectcosmos.abilities.cosmicbending.solarbending;
+package com.xoarasol.projectcosmos.abilities.cosmicbending;
 
 import com.xoarasol.projectcosmos.ProjectCosmos;
 import com.xoarasol.projectcosmos.api.SolarAbility;
@@ -30,7 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author dario (_Hetag1216_)
  */
-public class SolarCyclone extends SolarAbility implements AddonAbility {
+public class Magnetar extends SolarAbility implements AddonAbility {
 
     private double currentHeight;
     private double currentRadius;
@@ -46,7 +46,7 @@ public class SolarCyclone extends SolarAbility implements AddonAbility {
     private Map<Integer, Integer> angles;
     private double maxHeight;
 
-    public SolarCyclone(Player player) {
+    public Magnetar(Player player) {
         super(player);
 
         if (this.bPlayer.canBend(this)) {

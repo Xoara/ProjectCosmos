@@ -4,7 +4,6 @@ import com.projectkorra.projectkorra.event.AbilityCollisionEvent;
 import com.projectkorra.projectkorra.event.BendingReloadEvent;
 import com.xoarasol.projectcosmos.ProjectCosmos;
 import com.xoarasol.projectcosmos.abilities.cosmicbending.MeteorShower;
-import com.xoarasol.projectcosmos.abilities.cosmicbending.lunarbending.Orbital;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
@@ -25,10 +24,6 @@ public class PCGeneralListener implements Listener {
         if (event.getEntityType() == EntityType.FALLING_BLOCK) {
             FallingBlock fBlock = (FallingBlock) event.getEntity();
 
-            if (fBlock.hasMetadata("orbital")) {
-                event.setCancelled(true);
-                ((Orbital) fBlock.getMetadata("orbital").get(0).value()).revertBlockCreation(fBlock, event.getBlock());
-            }
             if (fBlock.hasMetadata("gravitymanipulation")) {
                 event.setCancelled(true);
             }
